@@ -1,0 +1,13 @@
+file(
+    GLOB_RECURSE
+        SOURCES
+            src/*.c
+)
+
+idf_component_register(
+    SRCS ${SOURCES}
+    INCLUDE_DIRS
+        include
+)
+
+component_compile_options("-Wno-unused-label")
