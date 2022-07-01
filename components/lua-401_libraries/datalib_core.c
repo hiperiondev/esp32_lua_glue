@@ -138,23 +138,14 @@ static int datalib_var_new(lua_State *L) {
     return 1;
 }
 
-static int datalib_delete(lua_State *L) {
-    data_t *data = (data_t*) lua_touserdata(L, 1);
-    if (!_TRACK_allocated(data)) {
-        lua_pushnil(L);
-        return 0;
-    }
-    DATALIB_FREE(data);
-    return 0;
-}
-
 static int datalib_is_anynum(lua_State *L) {
+    if (!lua_isuserdata(L, 1)) {
+        lua_pop(L, 1);
+        lua_pushnil(L);
+        return 1;
+    }
     data_t *data = (data_t*) lua_touserdata(L, 1);
 
-    if (!_TRACK_allocated(data)) {
-        lua_pushnil(L);
-        return 0;
-    }
     if (ANY_NUM(data->type))
         lua_pushnumber(L, 1);
     else
@@ -164,12 +155,13 @@ static int datalib_is_anynum(lua_State *L) {
 }
 
 static int datalib_is_anydate(lua_State *L) {
+    if (!lua_isuserdata(L, 1)) {
+        lua_pop(L, 1);
+        lua_pushnil(L);
+        return 1;
+    }
     data_t *data = (data_t*) lua_touserdata(L, 1);
 
-    if (!_TRACK_allocated(data)) {
-        lua_pushnil(L);
-        return 0;
-    }
     if (ANY_DATE(data->type))
         lua_pushnumber(L, 1);
     else
@@ -179,12 +171,13 @@ static int datalib_is_anydate(lua_State *L) {
 }
 
 static int datalib_is_anybit(lua_State *L) {
+    if (!lua_isuserdata(L, 1)) {
+        lua_pop(L, 1);
+        lua_pushnil(L);
+        return 1;
+    }
     data_t *data = (data_t*) lua_touserdata(L, 1);
 
-    if (!_TRACK_allocated(data)) {
-        lua_pushnil(L);
-        return 0;
-    }
     if (ANY_BIT(data->type))
         lua_pushnumber(L, 1);
     else
@@ -194,12 +187,13 @@ static int datalib_is_anybit(lua_State *L) {
 }
 
 static int datalib_is_anyreal(lua_State *L) {
+    if (!lua_isuserdata(L, 1)) {
+        lua_pop(L, 1);
+        lua_pushnil(L);
+        return 1;
+    }
     data_t *data = (data_t*) lua_touserdata(L, 1);
 
-    if (!_TRACK_allocated(data)) {
-        lua_pushnil(L);
-        return 0;
-    }
     if (ANY_REAL(data->type))
         lua_pushnumber(L, 1);
     else
@@ -209,12 +203,13 @@ static int datalib_is_anyreal(lua_State *L) {
 }
 
 static int datalib_is_anyint(lua_State *L) {
+    if (!lua_isuserdata(L, 1)) {
+        lua_pop(L, 1);
+        lua_pushnil(L);
+        return 1;
+    }
     data_t *data = (data_t*) lua_touserdata(L, 1);
 
-    if (!_TRACK_allocated(data)) {
-        lua_pushnil(L);
-        return 0;
-    }
     if (ANY_INT(data->type))
         lua_pushnumber(L, 1);
     else
@@ -224,12 +219,13 @@ static int datalib_is_anyint(lua_State *L) {
 }
 
 static int datalib_is_anystring(lua_State *L) {
+    if (!lua_isuserdata(L, 1)) {
+        lua_pop(L, 1);
+        lua_pushnil(L);
+        return 1;
+    }
     data_t *data = (data_t*) lua_touserdata(L, 1);
 
-    if (!_TRACK_allocated(data)) {
-        lua_pushnil(L);
-        return 0;
-    }
     if (ANY_STRING(data->type))
         lua_pushnumber(L, 1);
     else
@@ -239,12 +235,13 @@ static int datalib_is_anystring(lua_State *L) {
 }
 
 static int datalib_is_anyelementary(lua_State *L) {
+    if (!lua_isuserdata(L, 1)) {
+        lua_pop(L, 1);
+        lua_pushnil(L);
+        return 1;
+    }
     data_t *data = (data_t*) lua_touserdata(L, 1);
 
-    if (!_TRACK_allocated(data)) {
-        lua_pushnil(L);
-        return 0;
-    }
     if (ANY_ELEMENTARY(data->type))
         lua_pushnumber(L, 1);
     else
@@ -256,11 +253,6 @@ static int datalib_is_anyelementary(lua_State *L) {
 static int datalib_getbit(lua_State *L) {
     data_t *data = (data_t*) lua_touserdata(L, 1);
     uint8_t bit = luaL_check_number(L, 2);
-
-    if (!_TRACK_allocated(data)) {
-        lua_pushnil(L);
-        return 0;
-    }
 
     if (ANY_BIT(data->type))
         lua_pushnumber(L, GET_BIT(data->ulint, bit));
@@ -274,10 +266,6 @@ static int datalib_setbit(lua_State *L) {
     data_t *data = (data_t*) lua_touserdata(L, 1);
     uint8_t bit = luaL_check_number(L, 2);
 
-    if (!_TRACK_allocated(data)) {
-        lua_pushnil(L);
-        return 0;
-    }
     if (ANY_BIT(data->type))
         data->ulint = SET_BIT(data->ulint, bit);
 
@@ -288,10 +276,6 @@ static int datalib_clearbit(lua_State *L) {
     data_t *data = (data_t*) lua_touserdata(L, 1);
     uint8_t bit = luaL_check_number(L, 2);
 
-    if (!_TRACK_allocated(data)) {
-        lua_pushnil(L);
-        return 0;
-    }
     if (ANY_BIT(data->type))
         data->ulint = CLR_BIT(data->ulint, bit);
 
@@ -299,18 +283,17 @@ static int datalib_clearbit(lua_State *L) {
 }
 
 static const struct luaL_reg datalib_core[] = {
-        { "var"                  , datalib_var_new          },
-        { "data_delete"          , datalib_delete           },
-        { "data_is_anynum"       , datalib_is_anynum        },
-        { "data_is_anydate"      , datalib_is_anydate       },
-        { "data_is_anybit"       , datalib_is_anybit        },
-        { "data_is_anyreal"      , datalib_is_anyreal       },
-        { "data_is_anyint"       , datalib_is_anyint        },
-        { "data_is_anystring"    , datalib_is_anystring     },
-        { "data_is_anyelementary", datalib_is_anyelementary },
-        { "data_getbit"          , datalib_getbit           },
-        { "data_setbit"          , datalib_setbit           },
-        { "data_clearbit"        , datalib_clearbit         },
+        { "var"             , datalib_var_new          },
+        { "is_anynum"       , datalib_is_anynum        },
+        { "is_anydate"      , datalib_is_anydate       },
+        { "is_anybit"       , datalib_is_anybit        },
+        { "is_anyreal"      , datalib_is_anyreal       },
+        { "is_anyint"       , datalib_is_anyint        },
+        { "is_anystring"    , datalib_is_anystring     },
+        { "is_anyelementary", datalib_is_anyelementary },
+        { "getbit"          , datalib_getbit           },
+        { "setbit"          , datalib_setbit           },
+        { "clearbit"        , datalib_clearbit         },
 };
 
 LUALIB_API void lua_datalib_coreopen(lua_State *L) {
