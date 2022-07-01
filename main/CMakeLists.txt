@@ -12,7 +12,7 @@ idf_component_register(
         esp_littlefs
         lua-401
         lua-401_libraries
-        lua_401_data_libraries
+        lua-401_data_libraries
         lua-401_port
         sshd
 )

@@ -1,0 +1,41 @@
+file(
+    GLOB_RECURSE
+        SOURCES
+            arithmetic/*.c
+            bit_shift/*.c
+            bitwise_boolean/*.c
+            comparison/*.c
+            conversion/*.c
+            core/*.c
+            date_time/*.c
+            extension/*.c
+            mathematical/*.c
+            selection/*.c
+            string/*.c
+            system/*.c
+            validation/*.c
+)
+
+idf_component_register(
+    SRCS ${SOURCES}
+    INCLUDE_DIRS
+        arithmetic
+        bit_shift
+        bitwise_boolean
+        comparison
+        conversion
+        core
+        date_time
+        extension
+        mathematical
+        selection
+        string
+        system
+        validation
+    REQUIRES
+        lua-401
+        lua-401_port
+        nvs_flash
+        tracklloc
+        sshd
+)
