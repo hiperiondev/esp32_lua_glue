@@ -49,8 +49,8 @@ int pclose(); */
 #define OUTFILE 1
 
 typedef struct IOCtrl {
-    int ref[2]; /* ref for strings _INPUT/_OUTPUT */
-    int iotag; /* tag for file handles */
+    int ref[2];    /* ref for strings _INPUT/_OUTPUT */
+    int iotag;     /* tag for file handles */
     int closedtag; /* tag for closed handles */
 } IOCtrl;
 

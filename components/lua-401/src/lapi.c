@@ -20,8 +20,7 @@
 #include "ltm.h"
 #include "lvm.h"
 
-const char lua_ident[] = "$Lua: " LUA_VERSION " " LUA_COPYRIGHT " $\n"
-"$Authors: " LUA_AUTHORS " $";
+const char lua_ident[] = "$Lua: " LUA_VERSION " " LUA_COPYRIGHT " $\n" "$Authors: " LUA_AUTHORS " $";
 
 #define Index(L,i)    ((i) >= 0 ? (L->Cbase+((i)-1)) : (L->top+(i)))
 
@@ -439,4 +438,3 @@ LUA_API void* lua_newuserdata(lua_State *L, size_t size) {
     api_incr_top(L);
     return ts->u.d.value;
 }
-

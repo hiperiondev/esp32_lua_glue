@@ -653,11 +653,11 @@ static const struct {
     char left; /* left priority for each binary operator */
     char right; /* right priority */
 } priority[] = { /* ORDER OPR */
-{ 5, 5 }, { 5, 5 }, { 6, 6 }, { 6, 6 }, /* arithmetic */
-{ 9, 8 }, { 4, 3 }, /* power and concat (right associative) */
-{ 2, 2 }, { 2, 2 }, /* equality */
-{ 2, 2 }, { 2, 2 }, { 2, 2 }, { 2, 2 }, /* order */
-{ 1, 1 }, { 1, 1 } /* logical */
+        { 5, 5 }, { 5, 5 }, { 6, 6 }, { 6, 6 }, /* arithmetic */
+        { 9, 8 }, { 4, 3 }, /* power and concat (right associative) */
+        { 2, 2 }, { 2, 2 }, /* equality */
+        { 2, 2 }, { 2, 2 }, { 2, 2 }, { 2, 2 }, /* order */
+        { 1, 1 }, { 1, 1 } /* logical */
 };
 
 #define UNARY_PRIORITY    7  /* priority for unary operators */

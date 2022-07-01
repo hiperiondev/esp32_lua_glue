@@ -45,6 +45,8 @@
 #define DATALIB_CALLOC(x,y)  _TRACK_calloc(x,y)
 #define DATALIB_FREE(x)      _TRACK_free(x)
 
+int types_tags[DATA_TYPES_QTY] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
 const char *types_name[DATA_TYPES_QTY] = {
     EP(DATA_TYPE_NULL),
     EP(DATA_TYPE_BOOL),
@@ -74,7 +76,30 @@ static void strupp(char *beg) {
         ;
 }
 
-static int datalib_create(lua_State *L) {
+static int datalib_var_get(lua_State *L) {
+    data_t *data = lua_touserdata(L, 1);
+    const char *i = luaL_check_string(L, 2);
+    if (!strcmp(i, "tt")) {
+        lua_pushnumber(L, data->tt);
+        goto end;
+    }
+    if (!strcmp(i, "val")) {
+        lua_pushnumber(L, data->dint);
+        goto end;
+    }
+    lua_pushnumber(L, 0.0);
+
+    end:
+    return 1;
+}
+
+static int datalib_var_set(lua_State *L) {
+    return 0;
+}
+
+/////////////////////
+
+static int datalib_var_new(lua_State *L) {
     uint8_t n, t = 255;
     char tp[64];
     data_t *data;
@@ -93,20 +118,27 @@ static int datalib_create(lua_State *L) {
         return 0;
     }
 
-    data = DATALIB_CALLOC(1, sizeof(data_t));
-    if (data == NULL) {
-        lua_error(L, "can't allocate");
-        return 0;
+    if (types_tags[t] == 0) {
+        int xtag = lua_newtag(L);
+        types_tags[t] = xtag;
+        lua_pushcfunction(L, datalib_var_get);
+        lua_settagmethod(L, xtag, "gettable");
+        lua_pushcfunction(L, datalib_var_set);
+        lua_settagmethod(L, xtag, "settable");
     }
+
+    lua_newuserdata(L, sizeof(data_t));
+    lua_settag(L, types_tags[t]);
+    data = lua_touserdata(L, -1);
 
     data->type = t;
     data->tt = DATA_TT_NORMAL;
-    lua_pushuserdata(L, data);
+
+    lua_pushusertag(L, data, types_tags[t]);
     return 1;
 }
 
 static int datalib_delete(lua_State *L) {
-    //lua_Object pointer = lua_getparam(1);
     data_t *data = (data_t*) lua_touserdata(L, 1);
     if (!_TRACK_allocated(data)) {
         lua_pushnil(L);
@@ -117,7 +149,6 @@ static int datalib_delete(lua_State *L) {
 }
 
 static int datalib_is_anynum(lua_State *L) {
-    //lua_Object pointer = lua_getparam(1);
     data_t *data = (data_t*) lua_touserdata(L, 1);
 
     if (!_TRACK_allocated(data)) {
@@ -133,7 +164,6 @@ static int datalib_is_anynum(lua_State *L) {
 }
 
 static int datalib_is_anydate(lua_State *L) {
-    //lua_Object pointer = lua_getparam(1);
     data_t *data = (data_t*) lua_touserdata(L, 1);
 
     if (!_TRACK_allocated(data)) {
@@ -149,7 +179,6 @@ static int datalib_is_anydate(lua_State *L) {
 }
 
 static int datalib_is_anybit(lua_State *L) {
-    //lua_Object pointer = lua_getparam(1);
     data_t *data = (data_t*) lua_touserdata(L, 1);
 
     if (!_TRACK_allocated(data)) {
@@ -165,7 +194,6 @@ static int datalib_is_anybit(lua_State *L) {
 }
 
 static int datalib_is_anyreal(lua_State *L) {
-    //lua_Object pointer = lua_getparam(1);
     data_t *data = (data_t*) lua_touserdata(L, 1);
 
     if (!_TRACK_allocated(data)) {
@@ -181,7 +209,6 @@ static int datalib_is_anyreal(lua_State *L) {
 }
 
 static int datalib_is_anyint(lua_State *L) {
-    //lua_Object pointer = lua_getparam(1);
     data_t *data = (data_t*) lua_touserdata(L, 1);
 
     if (!_TRACK_allocated(data)) {
@@ -197,7 +224,6 @@ static int datalib_is_anyint(lua_State *L) {
 }
 
 static int datalib_is_anystring(lua_State *L) {
-    //lua_Object pointer = lua_getparam(1);
     data_t *data = (data_t*) lua_touserdata(L, 1);
 
     if (!_TRACK_allocated(data)) {
@@ -213,7 +239,6 @@ static int datalib_is_anystring(lua_State *L) {
 }
 
 static int datalib_is_anyelementary(lua_State *L) {
-    //lua_Object pointer = lua_getparam(1);
     data_t *data = (data_t*) lua_touserdata(L, 1);
 
     if (!_TRACK_allocated(data)) {
@@ -229,7 +254,6 @@ static int datalib_is_anyelementary(lua_State *L) {
 }
 
 static int datalib_getbit(lua_State *L) {
-    //lua_Object pointer = lua_getparam(1);
     data_t *data = (data_t*) lua_touserdata(L, 1);
     uint8_t bit = luaL_check_number(L, 2);
 
@@ -247,7 +271,6 @@ static int datalib_getbit(lua_State *L) {
 }
 
 static int datalib_setbit(lua_State *L) {
-    //lua_Object pointer = lua_getparam(1);
     data_t *data = (data_t*) lua_touserdata(L, 1);
     uint8_t bit = luaL_check_number(L, 2);
 
@@ -262,7 +285,6 @@ static int datalib_setbit(lua_State *L) {
 }
 
 static int datalib_clearbit(lua_State *L) {
-    //lua_Object pointer = lua_getparam(1);
     data_t *data = (data_t*) lua_touserdata(L, 1);
     uint8_t bit = luaL_check_number(L, 2);
 
@@ -277,7 +299,7 @@ static int datalib_clearbit(lua_State *L) {
 }
 
 static const struct luaL_reg datalib_core[] = {
-        { "data_create"          , datalib_create           },
+        { "var"                  , datalib_var_new          },
         { "data_delete"          , datalib_delete           },
         { "data_is_anynum"       , datalib_is_anynum        },
         { "data_is_anydate"      , datalib_is_anydate       },

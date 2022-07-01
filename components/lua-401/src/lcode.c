@@ -365,8 +365,20 @@ void luaK_infix(LexState *ls, BinOpr op, expdesc *v) {
 static const struct {
     OpCode opcode; /* opcode for each binary operator */
     int arg; /* default argument for the opcode */
-} codes[] = { /* ORDER OPR */{ OP_ADD, 0 }, { OP_SUB, 0 }, { OP_MULT, 0 }, { OP_DIV, 0 }, { OP_POW, 0 }, { OP_CONCAT, 2 }, { OP_JMPNE, NO_JUMP }, { OP_JMPEQ, NO_JUMP },
-        { OP_JMPLT, NO_JUMP }, { OP_JMPLE, NO_JUMP }, { OP_JMPGT, NO_JUMP }, { OP_JMPGE, NO_JUMP } };
+} codes[] = { /* ORDER OPR */
+        { OP_ADD, 0 },
+        { OP_SUB, 0 },
+        { OP_MULT, 0 },
+        { OP_DIV, 0 },
+        { OP_POW, 0 },
+        { OP_CONCAT, 2 },
+        { OP_JMPNE, NO_JUMP },
+        { OP_JMPEQ, NO_JUMP },
+        { OP_JMPLT, NO_JUMP },
+        { OP_JMPLE, NO_JUMP },
+        { OP_JMPGT, NO_JUMP },
+        { OP_JMPGE, NO_JUMP }
+};
 
 void luaK_posfix(LexState *ls, BinOpr op, expdesc *v1, expdesc *v2) {
     FuncState *fs = ls->fs;
@@ -644,54 +656,54 @@ int luaK_code2(FuncState *fs, OpCode o, int arg1, int arg2) {
     return fs->pc++;
 }
 
-const struct OpProperties luaK_opproperties[NUM_OPCODES] = { { iO, 0, 0 }, /* OP_END */
-{ iU, 0, 0 }, /* OP_RETURN */
-{ iAB, 0, 0 }, /* OP_CALL */
-{ iAB, 0, 0 }, /* OP_TAILCALL */
-{ iU, VD, 0 }, /* OP_PUSHNIL */
-{ iU, VD, 0 }, /* OP_POP */
-{ iS, 1, 0 }, /* OP_PUSHINT */
-{ iU, 1, 0 }, /* OP_PUSHSTRING */
-{ iU, 1, 0 }, /* OP_PUSHNUM */
-{ iU, 1, 0 }, /* OP_PUSHNEGNUM */
-{ iU, 1, 0 }, /* OP_PUSHUPVALUE */
-{ iU, 1, 0 }, /* OP_GETLOCAL */
-{ iU, 1, 0 }, /* OP_GETGLOBAL */
-{ iO, 1, 2 }, /* OP_GETTABLE */
-{ iU, 1, 1 }, /* OP_GETDOTTED */
-{ iU, 1, 1 }, /* OP_GETINDEXED */
-{ iU, 2, 1 }, /* OP_PUSHSELF */
-{ iU, 1, 0 }, /* OP_CREATETABLE */
-{ iU, 0, 1 }, /* OP_SETLOCAL */
-{ iU, 0, 1 }, /* OP_SETGLOBAL */
-{ iAB, VD, 0 }, /* OP_SETTABLE */
-{ iAB, VD, 0 }, /* OP_SETLIST */
-{ iU, VD, 0 }, /* OP_SETMAP */
-{ iO, 1, 2 }, /* OP_ADD */
-{ iS, 1, 1 }, /* OP_ADDI */
-{ iO, 1, 2 }, /* OP_SUB */
-{ iO, 1, 2 }, /* OP_MULT */
-{ iO, 1, 2 }, /* OP_DIV */
-{ iO, 1, 2 }, /* OP_POW */
-{ iU, VD, 0 }, /* OP_CONCAT */
-{ iO, 1, 1 }, /* OP_MINUS */
-{ iO, 1, 1 }, /* OP_NOT */
-{ iS, 0, 2 }, /* OP_JMPNE */
-{ iS, 0, 2 }, /* OP_JMPEQ */
-{ iS, 0, 2 }, /* OP_JMPLT */
-{ iS, 0, 2 }, /* OP_JMPLE */
-{ iS, 0, 2 }, /* OP_JMPGT */
-{ iS, 0, 2 }, /* OP_JMPGE */
-{ iS, 0, 1 }, /* OP_JMPT */
-{ iS, 0, 1 }, /* OP_JMPF */
-{ iS, 0, 1 }, /* OP_JMPONT */
-{ iS, 0, 1 }, /* OP_JMPONF */
-{ iS, 0, 0 }, /* OP_JMP */
-{ iO, 0, 0 }, /* OP_PUSHNILJMP */
-{ iS, 0, 0 }, /* OP_FORPREP */
-{ iS, 0, 3 }, /* OP_FORLOOP */
-{ iS, 2, 0 }, /* OP_LFORPREP */
-{ iS, 0, 3 }, /* OP_LFORLOOP */
-{ iAB, VD, 0 } /* OP_CLOSURE */
+const struct OpProperties luaK_opproperties[NUM_OPCODES] = {
+        { iO, 0, 0 },   /* OP_END */
+        { iU, 0, 0 },   /* OP_RETURN */
+        { iAB, 0, 0 },  /* OP_CALL */
+        { iAB, 0, 0 },  /* OP_TAILCALL */
+        { iU, VD, 0 },  /* OP_PUSHNIL */
+        { iU, VD, 0 },  /* OP_POP */
+        { iS, 1, 0 },   /* OP_PUSHINT */
+        { iU, 1, 0 },   /* OP_PUSHSTRING */
+        { iU, 1, 0 },   /* OP_PUSHNUM */
+        { iU, 1, 0 },   /* OP_PUSHNEGNUM */
+        { iU, 1, 0 },   /* OP_PUSHUPVALUE */
+        { iU, 1, 0 },   /* OP_GETLOCAL */
+        { iU, 1, 0 },   /* OP_GETGLOBAL */
+        { iO, 1, 2 },   /* OP_GETTABLE */
+        { iU, 1, 1 },   /* OP_GETDOTTED */
+        { iU, 1, 1 },   /* OP_GETINDEXED */
+        { iU, 2, 1 },   /* OP_PUSHSELF */
+        { iU, 1, 0 },   /* OP_CREATETABLE */
+        { iU, 0, 1 },   /* OP_SETLOCAL */
+        { iU, 0, 1 },   /* OP_SETGLOBAL */
+        { iAB, VD, 0 }, /* OP_SETTABLE */
+        { iAB, VD, 0 }, /* OP_SETLIST */
+        { iU, VD, 0 },  /* OP_SETMAP */
+        { iO, 1, 2 },   /* OP_ADD */
+        { iS, 1, 1 },   /* OP_ADDI */
+        { iO, 1, 2 },   /* OP_SUB */
+        { iO, 1, 2 },   /* OP_MULT */
+        { iO, 1, 2 },   /* OP_DIV */
+        { iO, 1, 2 },   /* OP_POW */
+        { iU, VD, 0 },  /* OP_CONCAT */
+        { iO, 1, 1 },   /* OP_MINUS */
+        { iO, 1, 1 },   /* OP_NOT */
+        { iS, 0, 2 },   /* OP_JMPNE */
+        { iS, 0, 2 },   /* OP_JMPEQ */
+        { iS, 0, 2 },   /* OP_JMPLT */
+        { iS, 0, 2 },   /* OP_JMPLE */
+        { iS, 0, 2 },   /* OP_JMPGT */
+        { iS, 0, 2 },   /* OP_JMPGE */
+        { iS, 0, 1 },   /* OP_JMPT */
+        { iS, 0, 1 },   /* OP_JMPF */
+        { iS, 0, 1 },   /* OP_JMPONT */
+        { iS, 0, 1 },   /* OP_JMPONF */
+        { iS, 0, 0 },   /* OP_JMP */
+        { iO, 0, 0 },   /* OP_PUSHNILJMP */
+        { iS, 0, 0 },   /* OP_FORPREP */
+        { iS, 0, 3 },   /* OP_FORLOOP */
+        { iS, 2, 0 },   /* OP_LFORPREP */
+        { iS, 0, 3 },   /* OP_LFORLOOP */
+        { iAB, VD, 0 }  /* OP_CLOSURE */
 };
-

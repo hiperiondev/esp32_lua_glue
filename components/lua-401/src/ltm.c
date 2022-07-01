@@ -16,7 +16,24 @@
 #include "ltm.h"
 
 const char *const luaT_eventname[] = { /* ORDER TM */
-"gettable", "settable", "index", "getglobal", "setglobal", "add", "sub", "mul", "div", "pow", "unm", "lt", "concat", "gc", "function", "le", "gt", "ge", /* deprecated options!! */
+        "gettable",
+        "settable",
+        "index",
+        "getglobal",
+        "setglobal",
+        "add",
+        "sub",
+        "mul",
+        "div",
+        "pow",
+        "unm",
+        "lt",
+        "concat",
+        "gc",
+        "function",
+        "le", /* deprecated options!! */
+        "gt", /* deprecated options!! */
+        "ge", /* deprecated options!! */
 NULL };
 
 static int findevent(const char *name) {
@@ -42,12 +59,13 @@ static int luaI_checkevent(lua_State *L, const char *name, int t) {
  *  'placeholder' for "default" fallbacks
  */
 /* ORDER LUA_T, ORDER TM */
-static const char luaT_validevents[NUM_TAGS][TM_N] = { { 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 }, /* LUA_TUSERDATA */
-{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, /* LUA_TNIL */
-{ 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 }, /* LUA_TNUMBER */
-{ 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 }, /* LUA_TSTRING */
-{ 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 }, /* LUA_TTABLE */
-{ 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0 } /* LUA_TFUNCTION */
+static const char luaT_validevents[NUM_TAGS][TM_N] = {
+        { 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 }, /* LUA_TUSERDATA */
+        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, /* LUA_TNIL */
+        { 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 }, /* LUA_TNUMBER */
+        { 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 }, /* LUA_TSTRING */
+        { 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 }, /* LUA_TTABLE */
+        { 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0 }  /* LUA_TFUNCTION */
 };
 
 int luaT_validevent(int t, int e) { /* ORDER LUA_T */
@@ -141,4 +159,3 @@ LUA_API void lua_settagmethod(lua_State *L, int t, const char *event) {
     }
     L->top--;
 }
-

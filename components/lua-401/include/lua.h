@@ -19,33 +19,33 @@
 #endif
 
 #define LUA_VERSION    "Lua 4.0.1"
-#define LUA_COPYRIGHT    "Copyright (C) 1994-2000 TeCGraf, PUC-Rio"
-#define LUA_AUTHORS     "W. Celes, R. Ierusalimschy & L. H. de Figueiredo"
+#define LUA_COPYRIGHT  "Copyright (C) 1994-2000 TeCGraf, PUC-Rio"
+#define LUA_AUTHORS    "W. Celes, R. Ierusalimschy & L. H. de Figueiredo"
 
 /* name of global variable with error handler */
-#define LUA_ERRORMESSAGE    "_ERRORMESSAGE"
+#define LUA_ERRORMESSAGE  "_ERRORMESSAGE"
 
 /* pre-defined references */
-#define LUA_NOREF    (-2)
-#define LUA_REFNIL    (-1)
-#define LUA_REFREGISTRY    0
+#define LUA_NOREF        (-2)
+#define LUA_REFNIL       (-1)
+#define LUA_REFREGISTRY  0
 
 /* pre-defined tags */
-#define LUA_ANYTAG    (-1)
-#define LUA_NOTAG    (-2)
+#define LUA_ANYTAG  (-1)
+#define LUA_NOTAG   (-2)
 
 /* option for multiple returns in lua_call */
-#define LUA_MULTRET    (-1)
+#define LUA_MULTRET  (-1)
 
 /* minimum stack available for a C function */
-#define LUA_MINSTACK    20
+#define LUA_MINSTACK  20
 
 /* error codes for lua_do* */
-#define LUA_ERRRUN    1
+#define LUA_ERRRUN     1
 #define LUA_ERRFILE    2
-#define LUA_ERRSYNTAX    3
-#define LUA_ERRMEM    4
-#define LUA_ERRERR    5
+#define LUA_ERRSYNTAX  3
+#define LUA_ERRMEM     4
+#define LUA_ERRERR     5
 
 typedef struct lua_State lua_State;
 
@@ -224,4 +224,3 @@ LUA_API void* lua_newuserdata(lua_State *L, size_t size);
  *
  * This implementation contains no third-party code.
  ******************************************************************************/
-

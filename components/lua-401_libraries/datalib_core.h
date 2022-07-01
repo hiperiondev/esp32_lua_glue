@@ -40,6 +40,7 @@
 
 extern const char *types_name[DATA_TYPES_QTY];
 extern const char *types_tt[DATA_TT_QTY];
+extern int types_tags[DATA_TYPES_QTY];
 
 // data types
 typedef enum {
