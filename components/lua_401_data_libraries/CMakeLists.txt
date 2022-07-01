@@ -9,10 +9,9 @@ idf_component_register(
     INCLUDE_DIRS
         .
     REQUIRES
-        esp_littlefs
         lua-401
-        lua-401_libraries
-        lua_401_data_libraries
         lua-401_port
+        nvs_flash
+        tracklloc
         sshd
 )

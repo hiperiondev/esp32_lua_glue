@@ -41,10 +41,6 @@
 #include "datalib_core.h"
 #include "tracklloc.h"
 
-#define DATALIB_MALLOC(x)    _TRACK_malloc(x)
-#define DATALIB_CALLOC(x,y)  _TRACK_calloc(x,y)
-#define DATALIB_FREE(x)      _TRACK_free(x)
-
 int types_tags[DATA_TYPES_QTY] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 const char *types_name[DATA_TYPES_QTY] = {
@@ -177,6 +173,95 @@ static int datalib_var_get(lua_State *L) {
 }
 
 static int datalib_var_set(lua_State *L) {
+    data_t *data = lua_touserdata(L, 1);
+    const char *i = luaL_check_string(L, 2);
+    const double t = luaL_check_number(L, 3);
+    if (!strcmp(i, "tt")) {
+        data->tt = t;
+        goto end;
+    }
+
+    if (!strcmp(i, "type")) {
+        data->type = t;
+        goto end;
+    }
+
+    if (!strcmp(i, "val")) {
+        switch (data->type) {
+            case DATA_TYPE_NULL:
+            case DATA_TYPE_NIL:
+                break;
+
+            case DATA_TYPE_BOOL:
+                if (t)
+                    data->boolean = true;
+                else
+                    data->boolean = false;
+                break;
+
+            case DATA_TYPE_SINT:
+                data->sint = t;
+                break;
+
+            case DATA_TYPE_INT:
+                data->intg = t;
+                break;
+
+            case DATA_TYPE_DINT:
+                data->dint = t;
+                break;
+
+            case DATA_TYPE_USINT:
+                data->usint = t;
+                break;
+
+            case DATA_TYPE_UINT:
+                data->uint = t;
+                break;
+
+            case DATA_TYPE_UDINT:
+                data->udint = t;
+                break;
+
+            case DATA_TYPE_LINT: // TODO: implement
+            case DATA_TYPE_ULINT:
+                break;
+
+            case DATA_TYPE_REAL: // TODO: implement
+                break;
+
+            case DATA_TYPE_LREAL: // TODO: implement
+                break;
+
+            case DATA_TYPE_TIME: // TODO: implement
+                break;
+
+            case DATA_TYPE_DATE: // TODO: implement
+                break;
+
+            case DATA_TYPE_TOD: // TODO: implement
+                break;
+
+            case DATA_TYPE_DT: // TODO: implement
+                break;
+
+            case DATA_TYPE_STRING: // TODO: implement
+                break;
+
+            case DATA_TYPE_WSTRING: // TODO: implement
+                break;
+
+            case DATA_TYPE_POINTER: // TODO: implement
+            case DATA_TYPE_TABLE:
+            case DATA_TYPE_USER:
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    end:
     return 0;
 }
 
