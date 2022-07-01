@@ -79,15 +79,98 @@ static void strupp(char *beg) {
 static int datalib_var_get(lua_State *L) {
     data_t *data = lua_touserdata(L, 1);
     const char *i = luaL_check_string(L, 2);
+
     if (!strcmp(i, "tt")) {
         lua_pushnumber(L, data->tt);
         goto end;
     }
-    if (!strcmp(i, "val")) {
-        lua_pushnumber(L, data->dint);
+
+    if (!strcmp(i, "type")) {
+        lua_pushnumber(L, data->type);
         goto end;
     }
-    lua_pushnumber(L, 0.0);
+
+    if (!strcmp(i, "val")) {
+        switch (data->type) {
+            case DATA_TYPE_NULL:
+            case DATA_TYPE_NIL:
+                lua_pushnil(L);
+                break;
+
+            case DATA_TYPE_BOOL:
+                lua_pushnumber(L, data->boolean);
+                break;
+
+            case DATA_TYPE_SINT:
+                lua_pushnumber(L, data->sint);
+                break;
+
+            case DATA_TYPE_INT:
+                lua_pushnumber(L, data->intg);
+                break;
+
+            case DATA_TYPE_DINT:
+                lua_pushnumber(L, data->dint);
+                break;
+
+            case DATA_TYPE_USINT:
+                lua_pushnumber(L, data->usint);
+                break;
+
+            case DATA_TYPE_UINT:
+                lua_pushnumber(L, data->uint);
+                break;
+
+            case DATA_TYPE_UDINT:
+                lua_pushnumber(L, data->udint);
+                break;
+
+            case DATA_TYPE_LINT: // TODO: implement
+            case DATA_TYPE_ULINT:
+                lua_pushnil(L);
+                break;
+
+            case DATA_TYPE_REAL: // TODO: implement
+                lua_pushnumber(L, data->real);
+                break;
+            case DATA_TYPE_LREAL: // TODO: implement
+                lua_pushnil(L);
+                break;
+
+            case DATA_TYPE_TIME: // TODO: implement
+                lua_pushnil(L);
+                break;
+
+            case DATA_TYPE_DATE: // TODO: implement
+                lua_pushnil(L);
+                break;
+
+            case DATA_TYPE_TOD: // TODO: implement
+                lua_pushnil(L);
+                break;
+
+            case DATA_TYPE_DT: // TODO: implement
+                lua_pushnil(L);
+                break;
+
+            case DATA_TYPE_STRING: // TODO: implement
+                lua_pushnil(L);
+                break;
+
+            case DATA_TYPE_WSTRING: // TODO: implement
+                lua_pushnil(L);
+                break;
+
+            case DATA_TYPE_POINTER: // TODO: implement
+            case DATA_TYPE_TABLE:
+            case DATA_TYPE_USER:
+                lua_pushnil(L);
+                break;
+
+            default:
+                lua_pushnil(L);
+        }
+    }
 
     end:
     return 1;
@@ -133,6 +216,7 @@ static int datalib_var_new(lua_State *L) {
 
     data->type = t;
     data->tt = DATA_TT_NORMAL;
+    data->ulint = 0;
 
     lua_pushusertag(L, data, types_tags[t]);
     return 1;
