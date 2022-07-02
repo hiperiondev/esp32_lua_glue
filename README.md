@@ -1,33 +1,100 @@
-# Port of Lua 4 for ESP32 (ESP-IDF)
 
-This project aims to recover the original use of Lua, that is, a glue language. Nothing more and nothing less.
+# ESP32 Lua Glue   [![Badge License]][License]
 
-During these last years LUA has matured as a language becoming really complete exceeding the original ideas for which it was created.
+*A port of **Lua 4** for the **ESP32** / **ESP-IDF**.*
 
-It has also grown in both size and complexity which is not always desirable for small or speed-critical projects.
+<br>
 
-LUA 4 has several advantages for this: it is small, it is static (no more modifications), it is simple, it is easy to understand and modify.
+## Description
 
-If you really need a complete and mature language to embed in your applications you should consider alternatives like [NODEMCU](https://nodemcu.readthedocs.io/en/release/)
+This project aims to recover the original <br>
+use of Lua - that is - a glue language.
 
-# LIBRARIES
+***Nothing more and nothing less.***
 
-Only basic libraries that can serve as an interface between the application and the logic in LUA are added. Any other functionality will be usage dependent and will need to be added based on your usage.
+During these last years Lua has matured as a <br>
+language becoming quite complete exceeding <br>
+the original ideas for which it was created.
 
-## DATA TYPES
-Minimal functionality for full external data types is added. These types are those specified in IEC 61131-3.<p>
-Please read the [Wiki](https://github.com/hiperiondev/esp32_lua_glue/wiki).
+*It has also grown in both size and complexity which is* <br>
+*not always desirable for small or speed-critical projects.*
 
-## NETWORKING
-- Wi-Fi connection, disconnection and scan
-- A simple TFTP server
+**Lua 4** has several advantages for this:
 
-## MEMORY
-- Consumption control, free space and tasks
+- Static ( no more modifications )
+- Easy to understand / modify
+- Simple
+- Small
 
-#
-### TODO
+If you really need a complete and mature language <br>
+to embed in your applications you should consider <br>
+alternatives like **[NodeMCU]**
+
+<br>
+<br>
+
+## Libraries
+
+Only basic libraries that can serve as an interface <br>
+between the program and Lua's logic are added.
+
+Any other functionality will be usage dependent <br>
+and will need to be added based on your usage.
+
+<br>
+<br>
+
+## Data Types
+
+Minimal functionality for full external data types is <br>
+provided, these types are specified in `IEC 61131-3`, <br>
+please refer to the **[Wiki]** for more information.
+
+<br>
+<br>
+
+## Networking
+
+### WiFi
+
+Can `connect`, `disconnect` and `scan`.
+
+### TFTP
+
+Provides a simple TFTP server.
+
+<br>
+<br>
+
+## Memory
+
+- Managed memory consumption
+
+- Free space
+
+- Tasks
+
+<br>
+<br>
+
+## Todo
+
 - Complete minimal libraries
-- Add ssh console
-- Create documentation
-- Add persistence/serialization 
+
+- Add ssh to console
+
+- Write documentation
+
+- Add persistence / serialization 
+
+<br>
+
+
+<!----------------------------------------------------------------------------->
+
+[Badge License]: https://img.shields.io/badge/License-GPL_3-blue.svg?style=for-the-badge
+
+[NodeMCU]: https://nodemcu.readthedocs.io/en/release/
+[Wiki]: https://github.com/hiperiondev/esp32_lua_glue/wiki
+
+[License]: LICENSE
