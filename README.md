@@ -15,7 +15,8 @@ If you really need a complete and mature language to embed in your applications 
 Only basic libraries that can serve as an interface between the application and the logic in LUA are added. Any other functionality will be usage dependent and will need to be added based on your usage.
 
 ## DATA TYPES
-Minimal functionality for full external data types is added. These types are those specified in IEC 61131-3.
+Minimal functionality for full external data types is added. These types are those specified in IEC 61131-3.<p>
+Please read the [Wiki](https://github.com/hiperiondev/esp32_lua_glue/wiki).
 
 ## NETWORKING
 - Wi-Fi connection, disconnection and scan
