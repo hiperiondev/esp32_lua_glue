@@ -8,7 +8,7 @@ It has also grown in both size and complexity which is not always desirable for 
 
 LUA 4 has several advantages for this: it is small, it is static (no more modifications), it is simple, it is easy to understand and modify.
 
-If you really need a complete and mature language to embed in your applications you should consider alternatives like NODEMCU: https://nodemcu.readthedocs.io/en/release/
+If you really need a complete and mature language to embed in your applications you should consider alternatives like [NODEMCU](https://nodemcu.readthedocs.io/en/release/)
 
 # LIBRARIES
 
