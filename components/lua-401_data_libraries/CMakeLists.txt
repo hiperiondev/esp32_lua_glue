@@ -36,6 +36,4 @@ idf_component_register(
         lua-401
         lua-401_port
         nvs_flash
-        tracklloc
-        sshd
 )

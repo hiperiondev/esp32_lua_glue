@@ -41,7 +41,6 @@
 #include "lua-401_port.h"
 #include "datalib_core.h"
 #include "datalib_arithmetic.h"
-#include "tracklloc.h"
 
 static int datalib_add(lua_State *L) {
     data_t *data;
