@@ -126,7 +126,7 @@ static int datalib_var_get(lua_State *L) {
                 lua_pushnil(L);
                 break;
 
-            case DATA_TYPE_REAL: // TODO: implement
+            case DATA_TYPE_REAL:
                 lua_pushnumber(L, data->real);
                 break;
             case DATA_TYPE_LREAL: // TODO: implement
@@ -227,7 +227,8 @@ static int datalib_var_set(lua_State *L) {
             case DATA_TYPE_ULINT:
                 break;
 
-            case DATA_TYPE_REAL: // TODO: implement
+            case DATA_TYPE_REAL:
+                data->real = t;
                 break;
 
             case DATA_TYPE_LREAL: // TODO: implement
@@ -264,8 +265,6 @@ static int datalib_var_set(lua_State *L) {
     end:
     return 0;
 }
-
-/////////////////////
 
 static int datalib_var_new(lua_State *L) {
     uint8_t n, t = 255;
@@ -419,7 +418,28 @@ static int datalib_is_anyelementary(lua_State *L) {
     return 1;
 }
 
+static int datalib_is_anymagnitude(lua_State *L) {
+    if (!lua_isuserdata(L, 1)) {
+        lua_pop(L, 1);
+        lua_pushnil(L);
+        return 1;
+    }
+    data_t *data = (data_t*) lua_touserdata(L, 1);
+
+    if (ANY_MAGNITUDE(data->type))
+        lua_pushnumber(L, 1);
+    else
+        lua_pushnil(L);
+
+    return 1;
+}
+
 static int datalib_getbit(lua_State *L) {
+    if (!lua_isuserdata(L, 1)) {
+        lua_pop(L, 1);
+        lua_pushnil(L);
+        return 1;
+    }
     data_t *data = (data_t*) lua_touserdata(L, 1);
     uint8_t bit = luaL_check_number(L, 2);
 
@@ -432,6 +452,11 @@ static int datalib_getbit(lua_State *L) {
 }
 
 static int datalib_setbit(lua_State *L) {
+    if (!lua_isuserdata(L, 1)) {
+        lua_pop(L, 1);
+        lua_pushnil(L);
+        return 1;
+    }
     data_t *data = (data_t*) lua_touserdata(L, 1);
     uint8_t bit = luaL_check_number(L, 2);
 
@@ -442,6 +467,11 @@ static int datalib_setbit(lua_State *L) {
 }
 
 static int datalib_clearbit(lua_State *L) {
+    if (!lua_isuserdata(L, 1)) {
+        lua_pop(L, 1);
+        lua_pushnil(L);
+        return 1;
+    }
     data_t *data = (data_t*) lua_touserdata(L, 1);
     uint8_t bit = luaL_check_number(L, 2);
 
@@ -460,6 +490,7 @@ static const struct luaL_reg datalib_core[] = {
         { "is_anyint"       , datalib_is_anyint        },
         { "is_anystring"    , datalib_is_anystring     },
         { "is_anyelementary", datalib_is_anyelementary },
+        { "is_anymagnitude" , datalib_is_anymagnitude  },
         { "getbit"          , datalib_getbit           },
         { "setbit"          , datalib_setbit           },
         { "clearbit"        , datalib_clearbit         },

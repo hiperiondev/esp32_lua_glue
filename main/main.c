@@ -56,6 +56,7 @@ void lua_task(void *pvParameter) {
     lua_networklibopen(L);
     lua_memorylibopen(L);
     lua_datalib_coreopen(L);
+    lua_datalib_arithmeticopen(L);
     l_uart_start();
 
     char *buffer = NULL;

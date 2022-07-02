@@ -165,13 +165,102 @@ typedef struct {
 #define ANY_DATE(x)              (x == DATA_TYPE_DATE || x == DATA_TYPE_TOD || x == DATA_TYPE_DT)
 #define ANY_BIT(x)               (x == DATA_TYPE_BOOL || x == DATA_TYPE_UINT || x == DATA_TYPE_UDINT || x == DATA_TYPE_ULINT)
 #define ANY_REAL(x)              (x == DATA_TYPE_REAL || x == DATA_TYPE_LREAL)
-#define ANY_INT(x)               (x == DATA_TYPE_UINT || x == DATA_TYPE_UDINT || x == DATA_TYPE_ULINT || x == DATA_TYPE_SINT || x == DATA_TYPE_INT || x == DATA_TYPE_DINT || x == DATA_TYPE_LINT)
 #define ANY_STRING(x)            (x == DATA_TYPE_STRING || x == DATA_TYPE_WSTRING)
 #define ANY_ELEMENTARY(x)        (ANY_BIT(x) || ANY_NUM(x) || ANY_DATE(x) || ANY_STRING(x) || x == DATA_TYPE_TIME)
+#define ANY_MAGNITUDE(x)         (x < 0x0d && !x == DATA_TYPE_NULL)
+#define ANY_INT(x)               (x < 0x0a && !x == DATA_TYPE_NULL)
 
 #define GET_BIT(v, b)            ((v >> b) & 1)
 #define SET_BIT(v, b)            ((v) | (1 << b))
 #define CLR_BIT(v, b)            ((v) & ~(1 << b))
+
+#define REMOVE_NIL(qty) \
+		lua_remove(L, qty); \
+		lua_pushnil(L);
+
+#define NOT_USERDATA(pos, qty) \
+		if (!lua_isuserdata(L, pos)) { \
+			REMOVE_NIL(qty) \
+		    return 1; \
+		}
+
+#define NOT_ANYMAGNITUDE(data, qty) \
+        if (!ANY_MAGNITUDE(data->type)) { \
+        	REMOVE_NIL(qty) \
+            return 1; \
+        }
+
+#define NOT_ANYINT(data, qty) \
+        if (!ANY_INT(data->type)) { \
+            REMOVE_NIL(qty) \
+            return 1; \
+        }
+
+#define NOT_ANYNUM(data, qty) \
+        if (!ANY_NUM(data->type)) { \
+            REMOVE_NIL(qty) \
+            return 1; \
+        }
+
+#define GET_VALUE(data, value) \
+		switch (data->type) { \
+		        case DATA_TYPE_BOOL: \
+		            value = data->boolean; \
+		            break; \
+		        case DATA_TYPE_SINT: \
+		            value = data->sint; \
+		            break; \
+		        case DATA_TYPE_INT: \
+		            value = data->intg; \
+		            break; \
+		        case DATA_TYPE_DINT: \
+		            value = data->dint; \
+		            break; \
+		        case DATA_TYPE_USINT: \
+		            value = data->usint; \
+		            break; \
+		        case DATA_TYPE_UINT: \
+		            value = data->uint; \
+		            break; \
+		        case DATA_TYPE_UDINT: \
+		            value = data->udint; \
+		            break; \
+		        case DATA_TYPE_REAL: \
+		            value = data->real; \
+		            break; \
+		        case DATA_TYPE_LREAL: \
+		            value = data->lreal; \
+		            break; \
+		        case DATA_TYPE_TIME: \
+		            value = data->time; \
+		            break; \
+		        case DATA_TYPE_DATE: \
+                    value = 0; \
+                    break; \
+                case DATA_TYPE_TOD: \
+                    value = 0; \
+                    break; \
+                case DATA_TYPE_DT: \
+                    value = 0; \
+                    break; \
+                case DATA_TYPE_STRING: \
+                    value = 0; \
+                    break; \
+                case DATA_TYPE_WSTRING: \
+                    value = 0; \
+                    break; \
+                case DATA_TYPE_POINTER: \
+                    value = 0; \
+                    break; \
+                case DATA_TYPE_TABLE: \
+                    value = 0; \
+                    break; \
+                case DATA_TYPE_USER: \
+                    value = 0; \
+                    break; \
+		        default: \
+		            break; \
+		    }
 
 void datalib_core_open(void);
 
