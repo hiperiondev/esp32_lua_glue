@@ -12,6 +12,10 @@ use of Lua - that is - a glue language.
 
 ***Nothing more and nothing less.***
 
+<br>
+
+### Problem
+
 During these last years Lua has matured as a <br>
 language becoming quite complete exceeding <br>
 the original ideas for which it was created.
@@ -19,12 +23,20 @@ the original ideas for which it was created.
 *It has also grown in both size and complexity which is* <br>
 *not always desirable for small or speed-critical projects.*
 
-**Lua 4** has several advantages for this:
+<br>
+
+### Lua 4
+
+This version has several advantages:
 
 - Static ( no more modifications )
 - Easy to understand / modify
 - Simple
 - Small
+
+<br>
+
+### Alternatives
 
 If you really need a complete and mature language <br>
 to embed in your applications you should consider <br>
@@ -55,11 +67,13 @@ please refer to the **[Wiki]** for more information.
 
 ## Networking
 
-### WiFi
+#### WiFi
 
 Can `connect`, `disconnect` and `scan`.
 
-### TFTP
+<br>
+
+#### TFTP
 
 Provides a simple TFTP server.
 
