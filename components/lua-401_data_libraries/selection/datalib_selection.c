@@ -41,12 +41,38 @@
 #include "datalib_core.h"
 #include "datalib_selection.h"
 
-static int datalib_6(lua_State *L) {
+static int datalib_move(lua_State *L) {
     return 0;
 }
 
+static int datalib_sel(lua_State *L) {
+    return 0;
+}
+
+static int datalib_max(lua_State *L) {
+    return 0;
+}
+
+static int datalib_min(lua_State *L) {
+    return 0;
+}
+
+static int datalib_limit(lua_State *L) {
+    return 0;
+}
+
+static int datalib_mux(lua_State *L) {
+    return 0;
+}
+
+
 static const struct luaL_reg datalib_selection[] = {
-        { "" ,  datalib_6 },
+        { "_move"  ,datalib_move  },
+        { "_sel"   ,datalib_sel   },
+        { "_max"   ,datalib_max   },
+        { "_min"   ,datalib_min   },
+        { "_limit" ,datalib_limit },
+        { "_mux"   ,datalib_mux   }
 };
 
 LUALIB_API void lua_datalib_selectionopen(lua_State *L) {

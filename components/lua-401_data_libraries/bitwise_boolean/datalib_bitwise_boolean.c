@@ -41,12 +41,27 @@
 #include "datalib_core.h"
 #include "datalib_bitwise_boolean.h"
 
-static int datalib_1(lua_State *L) {
+static int datalib_and(lua_State *L) {
+    return 0;
+}
+
+static int datalib_or(lua_State *L) {
+    return 0;
+}
+
+static int datalib_xor(lua_State *L) {
+    return 0;
+}
+
+static int datalib_not(lua_State *L) {
     return 0;
 }
 
 static const struct luaL_reg datalib_bitwise_boolean[] = {
-        { "" ,  datalib_1 },
+        { "_and" ,  datalib_and },
+        { "_or"  ,  datalib_or  },
+        { "_xor" ,  datalib_xor },
+        { "_not" ,  datalib_not },
 };
 
 LUALIB_API void lua_datalib_bitwise_booleanopen(lua_State *L) {

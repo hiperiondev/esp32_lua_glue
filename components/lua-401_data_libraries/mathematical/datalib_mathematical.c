@@ -41,12 +41,67 @@
 #include "datalib_core.h"
 #include "datalib_mathematical.h"
 
-static int datalib_5(lua_State *L) {
+static int datalib_abs(lua_State *L) {
+    return 0;
+}
+
+static int datalib_sqrt(lua_State *L) {
+    return 0;
+}
+
+static int datalib_ln(lua_State *L) {
+    return 0;
+}
+
+static int datalib_log(lua_State *L) {
+    return 0;
+}
+
+static int datalib_exp(lua_State *L) {
+    return 0;
+}
+
+static int datalib_sin(lua_State *L) {
+    return 0;
+}
+
+static int datalib_cos(lua_State *L) {
+    return 0;
+}
+
+static int datalib_tan(lua_State *L) {
+    return 0;
+}
+
+static int datalib_asin(lua_State *L) {
+    return 0;
+}
+
+static int datalib_acos(lua_State *L) {
+    return 0;
+}
+
+static int datalib_atan(lua_State *L) {
+    return 0;
+}
+
+static int datalib_atan2(lua_State *L) {
     return 0;
 }
 
 static const struct luaL_reg datalib_mathematical[] = {
-        { "" ,  datalib_5 },
+        { "_abs"   ,datalib_abs   },
+        { "_sqrt"  ,datalib_sqrt  },
+        { "_ln"    ,datalib_ln    },
+        { "_log"   ,datalib_log   },
+        { "_exp"   ,datalib_exp   },
+        { "_sin"   ,datalib_sin   },
+        { "_cos"   ,datalib_cos   },
+        { "_tan"   ,datalib_tan   },
+        { "_asin"  ,datalib_asin  },
+        { "_acos"  ,datalib_acos  },
+        { "_atan"  ,datalib_atan  },
+        { "_atan2" ,datalib_atan2 }
 };
 
 LUALIB_API void lua_datalib_mathematicalopen(lua_State *L) {

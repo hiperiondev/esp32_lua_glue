@@ -41,12 +41,37 @@
 #include "datalib_core.h"
 #include "datalib_comparison.h"
 
-static int datalib_2(lua_State *L) {
+static int datalib_gt(lua_State *L) {
+    return 0;
+}
+
+static int datalib_ge(lua_State *L) {
+    return 0;
+}
+
+static int datalib_eq(lua_State *L) {
+    return 0;
+}
+
+static int datalib_le(lua_State *L) {
+    return 0;
+}
+
+static int datalib_lt(lua_State *L) {
+    return 0;
+}
+
+static int datalib_ne(lua_State *L) {
     return 0;
 }
 
 static const struct luaL_reg datalib_comparision[] = {
-        { "" ,  datalib_2 },
+        { "_gt" ,  datalib_gt },
+        { "_ge" ,  datalib_ge },
+        { "_eq" ,  datalib_eq },
+        { "_le" ,  datalib_le },
+        { "_lt" ,  datalib_lt },
+        { "_ne" ,  datalib_ne },
 };
 
 LUALIB_API void lua_datalib_comparisonopen(lua_State *L) {
