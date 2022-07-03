@@ -49,6 +49,6 @@ static const struct luaL_reg datalib_comparision[] = {
         { "" ,  datalib_2 },
 };
 
-LUALIB_API void lua_datalib_comparisionopen(lua_State *L) {
+LUALIB_API void lua_datalib_comparisonopen(lua_State *L) {
     luaL_openl(L, datalib_comparision);
 }

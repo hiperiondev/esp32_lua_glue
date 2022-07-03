@@ -26,7 +26,7 @@ LUALIB_API void lua_datalib_coreopen(lua_State *L);
 LUALIB_API void lua_datalib_arithmeticopen(lua_State *L);
 LUALIB_API void lua_datalib_bit_shiftopen(lua_State *L);
 LUALIB_API void lua_datalib_bitwise_booleanopen(lua_State *L);
-LUALIB_API void lua_datalib_comparison(lua_State *L);
+LUALIB_API void lua_datalib_comparisonopen(lua_State *L);
 LUALIB_API void lua_datalib_conversionopen(lua_State *L);
 LUALIB_API void lua_datalib_date_timeopen(lua_State *L);
 LUALIB_API void lua_datalib_mathematicalopen(lua_State *L);

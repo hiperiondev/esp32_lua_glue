@@ -49,6 +49,6 @@ static const struct luaL_reg datalib_string[] = {
         { "" ,  datalib_7 },
 };
 
-LUALIB_API void lua_datalib_stringnopen(lua_State *L) {
+LUALIB_API void lua_datalib_stringopen(lua_State *L) {
     luaL_openl(L, datalib_string);
 }

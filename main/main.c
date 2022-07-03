@@ -57,6 +57,15 @@ void lua_task(void *pvParameter) {
     lua_memorylibopen(L);
     lua_datalib_coreopen(L);
     lua_datalib_arithmeticopen(L);
+    lua_datalib_bit_shiftopen(L);
+    lua_datalib_bitwise_booleanopen(L);
+    lua_datalib_comparisonopen(L);
+    lua_datalib_conversionopen(L);
+    lua_datalib_date_timeopen(L);
+    lua_datalib_mathematicalopen(L);
+    lua_datalib_stringopen(L);
+    lua_datalib_systemopen(L);
+    lua_datalib_validationopen(L);
     l_uart_start();
 
     char *buffer = NULL;

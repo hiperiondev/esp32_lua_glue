@@ -29,6 +29,6 @@
 #ifndef DATALIB_COMPARISON_H_
 #define DATALIB_COMPARISON_H_
 
-LUALIB_API void lua_datalib_comparisionopen(lua_State *L);
+LUALIB_API void lua_datalib_comparisonopen(lua_State *L);
 
 #endif /* DATALIB_COMPARISON_H_ */
