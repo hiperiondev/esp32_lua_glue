@@ -90,82 +90,102 @@ static int datalib_var_get(lua_State *L) {
             case DATA_TYPE_NULL:
             case DATA_TYPE_NIL:
                 lua_pushnil(L);
+                goto end;
                 break;
 
             case DATA_TYPE_BOOL:
                 lua_pushnumber(L, data->boolean);
+                goto end;
                 break;
 
             case DATA_TYPE_SINT:
                 lua_pushnumber(L, data->sint);
+                goto end;
                 break;
 
             case DATA_TYPE_INT:
                 lua_pushnumber(L, data->intg);
+                goto end;
                 break;
 
             case DATA_TYPE_DINT:
                 lua_pushnumber(L, data->dint);
+                goto end;
                 break;
 
             case DATA_TYPE_USINT:
                 lua_pushnumber(L, data->usint);
+                goto end;
                 break;
 
             case DATA_TYPE_UINT:
                 lua_pushnumber(L, data->uint);
+                goto end;
                 break;
 
             case DATA_TYPE_UDINT:
                 lua_pushnumber(L, data->udint);
+                goto end;
                 break;
 
             case DATA_TYPE_LINT: // TODO: implement
             case DATA_TYPE_ULINT:
                 lua_pushnil(L);
+                goto end;
                 break;
 
             case DATA_TYPE_REAL:
                 lua_pushnumber(L, data->real);
+                goto end;
                 break;
             case DATA_TYPE_LREAL: // TODO: implement
                 lua_pushnil(L);
+                goto end;
                 break;
 
-            case DATA_TYPE_TIME: // TODO: implement
-                lua_pushnil(L);
+            case DATA_TYPE_TIME:
+                lua_pushnumber(L, data->time);
+                goto end;
                 break;
 
             case DATA_TYPE_DATE: // TODO: implement
                 lua_pushnil(L);
+                goto end;
                 break;
 
             case DATA_TYPE_TOD: // TODO: implement
                 lua_pushnil(L);
+                goto end;
                 break;
 
             case DATA_TYPE_DT: // TODO: implement
                 lua_pushnil(L);
+                goto end;
                 break;
 
             case DATA_TYPE_STRING: // TODO: implement
                 lua_pushnil(L);
+                goto end;
                 break;
 
             case DATA_TYPE_WSTRING: // TODO: implement
                 lua_pushnil(L);
+                goto end;
                 break;
 
             case DATA_TYPE_POINTER: // TODO: implement
             case DATA_TYPE_TABLE:
             case DATA_TYPE_USER:
                 lua_pushnil(L);
+                goto end;
                 break;
 
             default:
                 lua_pushnil(L);
+                goto end;
         }
     }
+    lua_error(L, "not allowed");
 
     end:
     return 1;
@@ -189,6 +209,7 @@ static int datalib_var_set(lua_State *L) {
         switch (data->type) {
             case DATA_TYPE_NULL:
             case DATA_TYPE_NIL:
+                goto end;
                 break;
 
             case DATA_TYPE_BOOL:
@@ -196,70 +217,90 @@ static int datalib_var_set(lua_State *L) {
                     data->boolean = true;
                 else
                     data->boolean = false;
+                goto end;
                 break;
 
             case DATA_TYPE_SINT:
                 data->sint = t;
+                goto end;
                 break;
 
             case DATA_TYPE_INT:
                 data->intg = t;
+                goto end;
                 break;
 
             case DATA_TYPE_DINT:
                 data->dint = t;
+                goto end;
                 break;
 
             case DATA_TYPE_USINT:
                 data->usint = t;
+                goto end;
                 break;
 
             case DATA_TYPE_UINT:
                 data->uint = t;
+                goto end;
                 break;
 
             case DATA_TYPE_UDINT:
                 data->udint = t;
+                goto end;
                 break;
 
             case DATA_TYPE_LINT: // TODO: implement
             case DATA_TYPE_ULINT:
+                goto end;
                 break;
 
             case DATA_TYPE_REAL:
                 data->real = t;
+                goto end;
                 break;
 
             case DATA_TYPE_LREAL: // TODO: implement
+                goto end;
                 break;
 
-            case DATA_TYPE_TIME: // TODO: implement
+            case DATA_TYPE_TIME:
+                data->time = t;
+                goto end;
                 break;
 
             case DATA_TYPE_DATE: // TODO: implement
+                goto end;
                 break;
 
             case DATA_TYPE_TOD: // TODO: implement
+                goto end;
                 break;
 
             case DATA_TYPE_DT: // TODO: implement
+                goto end;
                 break;
 
             case DATA_TYPE_STRING: // TODO: implement
+                goto end;
                 break;
 
             case DATA_TYPE_WSTRING: // TODO: implement
+                goto end;
                 break;
 
             case DATA_TYPE_POINTER: // TODO: implement
             case DATA_TYPE_TABLE:
             case DATA_TYPE_USER:
+                goto end;
                 break;
 
             default:
+                goto end;
                 break;
         }
     }
+    lua_error(L, "not allowed");
 
     end:
     return 0;

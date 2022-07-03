@@ -8,7 +8,6 @@ file(
             conversion/*.c
             core/*.c
             date_time/*.c
-            extension/*.c
             mathematical/*.c
             selection/*.c
             string/*.c
@@ -26,7 +25,6 @@ idf_component_register(
         conversion
         core
         date_time
-        extension
         mathematical
         selection
         string
