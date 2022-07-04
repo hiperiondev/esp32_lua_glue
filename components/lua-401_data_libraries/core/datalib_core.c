@@ -194,7 +194,18 @@ static int datalib_var_get(lua_State *L) {
 static int datalib_var_set(lua_State *L) {
     data_t *data = lua_touserdata(L, 1);
     const char *i = luaL_check_string(L, 2);
+    if (!strcmp(i, "from")) {
+        data_t *value = lua_touserdata(L, 3);
+
+        if(data->type != value->type)
+            lua_error(L, "not same type");
+
+        SET_VALUE(data, value)
+        goto end;
+    }
+
     const double t = luaL_check_number(L, 3);
+
     if (!strcmp(i, "tt")) {
         data->tt = t;
         goto end;

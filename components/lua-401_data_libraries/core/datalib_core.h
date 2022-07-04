@@ -262,6 +262,67 @@ typedef struct {
 		            break; \
 		    }
 
+
+#define SET_VALUE(data, value) \
+        switch (data->type) { \
+                case DATA_TYPE_BOOL: \
+                    data->boolean = value->boolean; \
+                    break; \
+                case DATA_TYPE_SINT: \
+                    data->sint = value->sint; \
+                    break; \
+                case DATA_TYPE_INT: \
+                    data->intg = value->intg; \
+                    break; \
+                case DATA_TYPE_DINT: \
+                    data->dint = value->dint; \
+                    break; \
+                case DATA_TYPE_USINT: \
+                    data->usint = value->usint; \
+                    break; \
+                case DATA_TYPE_UINT: \
+                    data->uint = value->uint; \
+                    break; \
+                case DATA_TYPE_UDINT: \
+                    data->udint = value->udint; \
+                    break; \
+                case DATA_TYPE_REAL: \
+                    data->real = value->real; \
+                    break; \
+                case DATA_TYPE_LREAL: \
+                    data->lreal = value->lreal; \
+                    break; \
+                case DATA_TYPE_TIME: \
+                    data->time = value->time; \
+                    break; \
+                case DATA_TYPE_DATE: \
+                    ; \
+                    break; \
+                case DATA_TYPE_TOD: \
+                    ; \
+                    break; \
+                case DATA_TYPE_DT: \
+                    ; \
+                    break; \
+                case DATA_TYPE_STRING: \
+                    ; \
+                    break; \
+                case DATA_TYPE_WSTRING: \
+                    ; \
+                    break; \
+                case DATA_TYPE_POINTER: \
+                    ; \
+                    break; \
+                case DATA_TYPE_TABLE: \
+                    ; \
+                    break; \
+                case DATA_TYPE_USER: \
+                    ; \
+                    break; \
+                default: \
+                    break; \
+            }
+
 void datalib_core_open(void);
 
 #endif /* DATA_H_ */

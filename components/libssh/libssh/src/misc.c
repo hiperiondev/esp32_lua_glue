@@ -24,17 +24,12 @@
 
 #include "config.h"
 
-#ifndef _WIN32
-/* This is needed for a standard getpwuid_r on opensolaris */
 #define _POSIX_PTHREAD_SEMANTICS
 #include <pwd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-
-#endif /* _WIN32 */
-
 #include <errno.h>
 #include <limits.h>
 #include <stdio.h>
@@ -47,24 +42,6 @@
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>
 #endif /* HAVE_SYS_TIME_H */
-
-
-#ifdef _WIN32
-
-#ifndef _WIN32_IE
-# define _WIN32_IE 0x0501 // SHGetSpecialFolderPath
-#endif
-
-#include <winsock2.h> // Must be the first to include
-#include <ws2tcpip.h>
-#include <shlobj.h>
-#include <direct.h>
-
-#ifdef HAVE_IO_H
-#include <io.h>
-#endif /* HAVE_IO_H */
-
-#endif /* _WIN32 */
 
 #include "libssh/priv.h"
 #include "libssh/misc.h"
