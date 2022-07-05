@@ -467,8 +467,8 @@ static int io_flush(lua_State *L) {
  ** =======================================================
  */
 
-static int io_execute(lua_State *L) {
-    lua_pushnumber(L, system(luaL_check_string(L, 1)));
+static int io_dofile(lua_State *L) {
+    lua_pushnumber(L, lua_dofile(L, luaL_check_string(L, 1)));
     return 1;
 }
 
@@ -632,7 +632,7 @@ static const struct luaL_reg iolib[] = {
 #ifdef INTERPRETER
         { "debug"         , io_debug   },
 #endif
-        { "execute"       , io_execute },
+        { "dofile "       , io_dofile  },
         { "exit"          , io_exit    },
         { "getenv"        , io_getenv  },
         { "remove"        , io_remove  },
