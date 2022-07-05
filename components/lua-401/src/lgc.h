@@ -7,10 +7,14 @@
 #ifndef lgc_h
 #define lgc_h
 
+#include "lua_common.h"
+#ifdef GC
+
 #include "lobject.h"
 
 void luaC_collect(lua_State *L, int all);
 void luaC_collectgarbage(lua_State *L);
 void luaC_checkGC(lua_State *L);
+#endif
 
 #endif

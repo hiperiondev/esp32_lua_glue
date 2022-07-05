@@ -32,12 +32,17 @@
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "esp_log.h"
+#include "linenoise/linenoise.h"
+#include "driver/uart.h"
+#include "esp_vfs_dev.h"
 
 #include "lua.h"
 #include "lualib.h"
 #include "lua_common.h"
 #include "lua-401_port.h"
-#include "uart.h"
+
+#define EX_UART_NUM UART_NUM_0
 
 struct Options {
   int toclose;
@@ -71,21 +76,44 @@ void lua_task(void *pvParameter) {
     lua_datalib_stringopen(L);
     lua_datalib_systemopen(L);
     lua_datalib_validationopen(L);
-    l_uart_start();
+
+    lua_dofile(L, "boot.lc");
 
 #ifdef INTERPRETER
-    char *buffer = NULL;
+    char *line;
+
+    fflush(stdout);
+    fsync(fileno(stdout));
+
+    esp_vfs_dev_uart_port_set_rx_line_endings(EX_UART_NUM, ESP_LINE_ENDINGS_CR);
+    esp_vfs_dev_uart_port_set_tx_line_endings(EX_UART_NUM, ESP_LINE_ENDINGS_CRLF);
+
+    setvbuf(stdin, NULL, _IONBF, 0);
+    setvbuf(stdout, NULL, _IONBF, 0);
+
+    uart_config_t uart_config = {
+                .baud_rate = 115200,
+                .data_bits = UART_DATA_8_BITS,
+                .parity    = UART_PARITY_DISABLE,
+                .stop_bits = UART_STOP_BITS_1,
+                .flow_ctrl = UART_HW_FLOWCTRL_DISABLE
+        };
+    ESP_ERROR_CHECK(uart_param_config(EX_UART_NUM, &uart_config));
+    ESP_ERROR_CHECK(uart_set_pin(EX_UART_NUM, -1, -1, -1, -1));
+    ESP_ERROR_CHECK(uart_driver_install(EX_UART_NUM, 256, 0, 0, NULL, 0));
+    esp_vfs_dev_uart_use_driver(EX_UART_NUM);
+
+    linenoiseHistorySetMaxLen(3);
+    linenoiseSetMaxLineLen(80);
+    linenoiseAllowEmpty(true);
 #endif
-    lua_dofile(L, "boot.lc");
 
     while (1) {
 #ifdef INTERPRETER
-        if (commands_queue) {
-            if (uxQueueMessagesWaiting(commands_queue)) {
-                if (xQueueReceive(commands_queue, &buffer, (portTickType) portMAX_DELAY)) {
-                    lua_dostring(L, buffer);
-                }
-            }
+        line = linenoise("lua > ");
+        if (strlen(line) > 0) {
+            lua_dostring(L, line);
+            linenoiseFree(line);
         }
 #endif
         vTaskDelay(10 / portTICK_PERIOD_MS);

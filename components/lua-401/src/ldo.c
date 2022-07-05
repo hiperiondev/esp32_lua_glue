@@ -182,7 +182,9 @@ void luaD_call(lua_State *L, StkId func, int nResults) {
             incr_top; /* must check stack space */
         }
     }
+#ifdef GC
     luaC_checkGC(L);
+#endif
 }
 
 /*
@@ -236,8 +238,10 @@ static int protectedparser(lua_State *L, ZIO *z, int bin) {
     p.z = z;
     p.bin = bin;
     /* before parsing, give a (good) chance to GC */
+#ifdef GC
     if (L->nblocks / 8 >= L->GCthreshold / 10)
         luaC_collectgarbage(L);
+#endif
     old_blocks = L->nblocks;
     status = luaD_runprotected(L, f_parser, &p);
     if (status == 0) {

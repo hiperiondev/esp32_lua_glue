@@ -7,7 +7,7 @@
 #include <string.h>
 
 #include "lua.h"
-
+#include "lua_common.h"
 #include "lapi.h"
 #include "ldo.h"
 #include "lfunc.h"
@@ -359,7 +359,9 @@ LUA_API void lua_setgcthreshold(lua_State *L, int newthreshold) {
         L->GCthreshold = ULONG_MAX;
     else
         L->GCthreshold = GCunscale(newthreshold);
+#ifdef GC
     luaC_checkGC(L);
+#endif
 }
 
 /*
@@ -428,7 +430,9 @@ LUA_API void lua_concat(lua_State *L, int n) {
     StkId top = L->top;
     luaV_strconc(L, n, top);
     L->top = top - (n - 1);
+#ifdef GC
     luaC_checkGC(L);
+#endif
 }
 
 LUA_API void* lua_newuserdata(lua_State *L, size_t size) {

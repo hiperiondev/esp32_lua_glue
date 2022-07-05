@@ -98,7 +98,9 @@ LUA_API lua_State* lua_open(int stacksize) {
 
 LUA_API void lua_close(lua_State *L) {
     LUA_ASSERT(L != lua_state || lua_gettop(L) == 0, "garbage in C stack");
+#ifdef GC
     luaC_collect(L, 1); /* collect all elements */
+#endif
     LUA_ASSERT(L->rootproto == NULL, "list should be empty"); LUA_ASSERT(L->rootcl == NULL, "list should be empty"); LUA_ASSERT(L->roottable == NULL, "list should be empty");
     luaS_freeall(L);
     if (L->stack)

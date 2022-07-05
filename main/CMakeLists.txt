@@ -14,4 +14,6 @@ idf_component_register(
         lua-401_libraries
         lua-401_data_libraries
         lua-401_port
+        console
+        vfs
 )

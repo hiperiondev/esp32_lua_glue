@@ -445,7 +445,9 @@ StkId luaV_execute(lua_State *L, const Closure *cl, StkId base) {
             }
             case OP_CREATETABLE: {
                 L->top = top;
+#ifdef GC
                 luaC_checkGC(L);
+#endif
                 hvalue(top) = luaH_new(L, GETARG_U(i));
                 ttype(top) = LUA_TTABLE;
                 top++;
@@ -540,7 +542,9 @@ StkId luaV_execute(lua_State *L, const Closure *cl, StkId base) {
                 luaV_strconc(L, n, top);
                 top -= n - 1;
                 L->top = top;
+#ifdef GC
                 luaC_checkGC(L);
+#endif
                 break;
             }
             case OP_MINUS: {
@@ -685,7 +689,9 @@ StkId luaV_execute(lua_State *L, const Closure *cl, StkId base) {
                 L->top = top;
                 luaV_Lclosure(L, tf->kproto[GETARG_A(i)], GETARG_B(i));
                 top = L->top;
+#ifdef GC
                 luaC_checkGC(L);
+#endif
                 break;
             }
         }

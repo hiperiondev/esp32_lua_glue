@@ -4,6 +4,9 @@
  ** See Copyright Notice in lua.h
  */
 
+#include "lua_common.h"
+#ifdef GC
+
 #include "lua.h"
 
 #include "ldo.h"
@@ -321,3 +324,5 @@ void luaC_checkGC(lua_State *L) {
     if (L->nblocks >= L->GCthreshold)
         luaC_collectgarbage(L);
 }
+
+#endif
