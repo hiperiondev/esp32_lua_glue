@@ -26,8 +26,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef COMMON_H_
-#define COMMON_H_
+#ifndef LUA_COMMON_H_
+#define LUA_COMMON_H_
 
 #define INTERPRETER 1 // enable interpreter and compiler
 #define GC          1 // enable garbage collector
@@ -37,4 +37,4 @@
 #define PRINTF(...) printf(__VA_ARGS__)
 #define EXIT(EN)    printf("exit not allowed: %d\n", EN)
 
-#endif /* COMMON_H_ */
+#endif /* LUA_COMMON_H_ */

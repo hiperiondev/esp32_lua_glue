@@ -26,8 +26,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef LUA25_PORT_H_
-#define LUA25_PORT_H_
+#ifndef LUA-401_PORT_H_
+#define LUA-401_PORT_H_
 
 //#include "sd.h"
 #include "littlefs.h"
@@ -53,4 +53,4 @@
 #define UART_STOP             l_uart_stop()
 #define UART_SEND(DT)         l_uart_send(DT)
 
-#endif /* LUA25_PORT_H_ */
+#endif /* LUA-401_PORT_H_ */

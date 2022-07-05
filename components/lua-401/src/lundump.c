@@ -207,7 +207,9 @@ Proto* luaU_undump(lua_State *L, ZIO *Z) {
         tf = LoadChunk(L, Z);
     c = zgetc(Z);
     if (c != EOZ)
-        luaO_verror(L, "`%.99s' apparently contains more than one chunk", ZNAME(Z));
+        // TODO: correct error from luac !!
+        //luaO_verror(L, "`%.99s' apparently contains more than one chunk\n\n", ZNAME(Z));
+        printf("`%.99s' apparently contains more than one chunk\n\n", ZNAME(Z));
     return tf;
 }
 
