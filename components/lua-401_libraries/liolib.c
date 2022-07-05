@@ -12,6 +12,7 @@
 
 #include "lua.h"
 
+#include "lua_common.h"
 #include "lauxlib.h"
 #include "luadebug.h"
 #include "lualib.h"
@@ -472,11 +473,11 @@ static int io_execute(lua_State *L) {
 }
 
 static int io_remove(lua_State *L) {
-    return pushresult(L, remove(luaL_check_string(L, 1)) == 0);
+    return pushresult(L, F_REMOVE(luaL_check_string(L, 1)) == 0);
 }
 
 static int io_rename(lua_State *L) {
-    return pushresult(L, rename(luaL_check_string(L, 1), luaL_check_string(L, 2)) == 0);
+    return pushresult(L, F_RENAME(luaL_check_string(L, 1), luaL_check_string(L, 2)) == 0);
 }
 
 static int io_tmpname(lua_State *L) {
@@ -511,7 +512,15 @@ static int io_date(lua_State *L) {
 static int setloc(lua_State *L) {
     static const int cat[] = { LC_ALL, LC_COLLATE, LC_CTYPE, LC_MONETARY,
     LC_NUMERIC, LC_TIME };
-    static const char *const catnames[] = { "all", "collate", "ctype", "monetary", "numeric", "time", NULL };
+    static const char *const catnames[] = {
+            "all",
+            "collate",
+            "ctype",
+            "monetary",
+            "numeric",
+            "time",
+            NULL
+    };
     int op = luaL_findstring(luaL_opt_string(L, 2, "all"), catnames);
     luaL_arg_check(L, op != -1, 2, "invalid option");
     lua_pushstring(L, setlocale(cat[op], luaL_check_string(L, 1)));
@@ -530,6 +539,7 @@ static int io_ls(lua_State *L) {
 
 /* }====================================================== */
 
+#ifdef INTERPRETER
 static int io_debug(lua_State *L) {
     for (;;) {
         char buffer[250];
@@ -541,6 +551,7 @@ static int io_debug(lua_State *L) {
     }
     return 0;
 }
+#endif
 
 #define LEVELS1    12    /* size of the first part of the stack */
 #define LEVELS2    10    /* size of the second part of the stack */
@@ -618,7 +629,9 @@ static const struct luaL_reg iolib[] = {
         { LUA_ERRORMESSAGE, errorfb },
         { "clock"         , io_clock   },
         { "date"          , io_date    },
+#ifdef INTERPRETER
         { "debug"         , io_debug   },
+#endif
         { "execute"       , io_execute },
         { "exit"          , io_exit    },
         { "getenv"        , io_getenv  },
@@ -672,4 +685,3 @@ LUALIB_API void lua_iolibopen(lua_State *L) {
     luaL_openl(L, iolib);
     openwithcontrol(L);
 }
-

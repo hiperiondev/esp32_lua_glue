@@ -42,7 +42,7 @@
 #include "lauxlib.h"
 #include "lualib.h"
 #include "lua-401_port.h"
-#include "common.h"
+#include "lua_common.h"
 
 const char *reset_reason[11] = {
         "ESP_RST_UNKNOWN",

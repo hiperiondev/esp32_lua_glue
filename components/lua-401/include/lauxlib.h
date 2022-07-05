@@ -13,20 +13,20 @@
 #include "lua.h"
 
 #ifndef LUALIB_API
-#define LUALIB_API    extern
+#define LUALIB_API  extern
 #endif
 
 struct luaL_reg {
-    const char *name;
+      const char *name;
     lua_CFunction func;
 };
 
-LUALIB_API void luaL_openlib(lua_State *L, const struct luaL_reg *l, int n);
-LUALIB_API void luaL_argerror(lua_State *L, int numarg, const char *extramsg);
+LUALIB_API        void luaL_openlib(lua_State *L, const struct luaL_reg *l, int n);
+LUALIB_API        void luaL_argerror(lua_State *L, int numarg, const char *extramsg);
 LUALIB_API const char* luaL_check_lstr(lua_State *L, int numArg, size_t *len);
 LUALIB_API const char* luaL_opt_lstr(lua_State *L, int numArg, const char *def, size_t *len);
-LUALIB_API double luaL_check_number(lua_State *L, int numArg);
-LUALIB_API double luaL_opt_number(lua_State *L, int numArg, double def);
+LUALIB_API      double luaL_check_number(lua_State *L, int numArg);
+LUALIB_API      double luaL_opt_number(lua_State *L, int numArg, double def);
 
 LUALIB_API void luaL_checkstack(lua_State *L, int space, const char *msg);
 LUALIB_API void luaL_checktype(lua_State *L, int narg, int t);

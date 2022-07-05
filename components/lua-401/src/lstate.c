@@ -8,6 +8,7 @@
 
 #include "lua.h"
 
+#include "lua_common.h"
 #include "ldo.h"
 #include "lgc.h"
 #include "llex.h"
@@ -47,7 +48,9 @@ static void f_luaopen(lua_State *L, void *ud) {
     L->gt = luaH_new(L, 10); /* table of globals */
     luaD_init(L, stacksize);
     luaS_init(L);
+#ifdef INTERPRETER
     luaX_init(L);
+#endif
     luaT_init(L);
     lua_newtable(L);
     lua_ref(L, 1); /* create registry */
@@ -109,4 +112,3 @@ LUA_API void lua_close(lua_State *L) {
     luaM_free(L, L->Mbuffer); LUA_ASSERT(L->nblocks == sizeof(lua_State), "wrong count for nblocks");
     luaM_free(L, L); LUA_ASSERT(L != lua_state || memdebug_numblocks == 0, "memory leak!"); LUA_ASSERT(L != lua_state || memdebug_total == 0,"memory leak!");
 }
-

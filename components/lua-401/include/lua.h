@@ -54,51 +54,51 @@ typedef int (*lua_CFunction)(lua_State *L);
 /*
  ** types returned by `lua_type'
  */
-#define LUA_TNONE    (-1)
+#define LUA_TNONE     (-1)
 
-#define LUA_TUSERDATA    0
-#define LUA_TNIL    1
+#define LUA_TUSERDATA  0
+#define LUA_TNIL       1
 #define LUA_TNUMBER    2
 #define LUA_TSTRING    3
-#define LUA_TTABLE    4
-#define LUA_TFUNCTION    5
+#define LUA_TTABLE     4
+#define LUA_TFUNCTION  5
 
 /*
  ** state manipulation
  */
 LUA_API lua_State* lua_open(int stacksize);
-LUA_API void lua_close(lua_State *L);
+LUA_API       void lua_close(lua_State *L);
 
 /*
  ** basic stack manipulation
  */
-LUA_API int lua_gettop(lua_State *L);
+LUA_API  int lua_gettop(lua_State *L);
 LUA_API void lua_settop(lua_State *L, int index);
 LUA_API void lua_pushvalue(lua_State *L, int index);
 LUA_API void lua_remove(lua_State *L, int index);
 LUA_API void lua_insert(lua_State *L, int index);
-LUA_API int lua_stackspace(lua_State *L);
+LUA_API  int lua_stackspace(lua_State *L);
 
 /*
  ** access functions (stack -> C)
  */
 
-LUA_API int lua_type(lua_State *L, int index);
-LUA_API const char* lua_typename(lua_State *L, int t);
-LUA_API int lua_isnumber(lua_State *L, int index);
-LUA_API int lua_isstring(lua_State *L, int index);
-LUA_API int lua_iscfunction(lua_State *L, int index);
-LUA_API int lua_tag(lua_State *L, int index);
+LUA_API           int lua_type(lua_State *L, int index);
+LUA_API   const char* lua_typename(lua_State *L, int t);
+LUA_API           int lua_isnumber(lua_State *L, int index);
+LUA_API           int lua_isstring(lua_State *L, int index);
+LUA_API           int lua_iscfunction(lua_State *L, int index);
+LUA_API           int lua_tag(lua_State *L, int index);
 
-LUA_API int lua_equal(lua_State *L, int index1, int index2);
-LUA_API int lua_lessthan(lua_State *L, int index1, int index2);
+LUA_API           int lua_equal(lua_State *L, int index1, int index2);
+LUA_API           int lua_lessthan(lua_State *L, int index1, int index2);
 
-LUA_API double lua_tonumber(lua_State *L, int index);
-LUA_API const char* lua_tostring(lua_State *L, int index);
-LUA_API size_t lua_strlen(lua_State *L, int index);
+LUA_API        double lua_tonumber(lua_State *L, int index);
+LUA_API   const char* lua_tostring(lua_State *L, int index);
+LUA_API        size_t lua_strlen(lua_State *L, int index);
 LUA_API lua_CFunction lua_tocfunction(lua_State *L, int index);
-LUA_API void* lua_touserdata(lua_State *L, int index);
-LUA_API const void* lua_topointer(lua_State *L, int index);
+LUA_API         void* lua_touserdata(lua_State *L, int index);
+LUA_API   const void* lua_topointer(lua_State *L, int index);
 
 /*
  ** push functions (C -> stack)
@@ -119,7 +119,7 @@ LUA_API void lua_rawget(lua_State *L, int index);
 LUA_API void lua_rawgeti(lua_State *L, int index, int n);
 LUA_API void lua_getglobals(lua_State *L);
 LUA_API void lua_gettagmethod(lua_State *L, int tag, const char *event);
-LUA_API int lua_getref(lua_State *L, int ref);
+LUA_API  int lua_getref(lua_State *L, int ref);
 LUA_API void lua_newtable(lua_State *L);
 
 /*
@@ -131,39 +131,39 @@ LUA_API void lua_rawset(lua_State *L, int index);
 LUA_API void lua_rawseti(lua_State *L, int index, int n);
 LUA_API void lua_setglobals(lua_State *L);
 LUA_API void lua_settagmethod(lua_State *L, int tag, const char *event);
-LUA_API int lua_ref(lua_State *L, int lock);
+LUA_API  int lua_ref(lua_State *L, int lock);
 
 /*
  ** "do" functions (run Lua code)
  */
-LUA_API int lua_call(lua_State *L, int nargs, int nresults);
+LUA_API  int lua_call(lua_State *L, int nargs, int nresults);
 LUA_API void lua_rawcall(lua_State *L, int nargs, int nresults);
-LUA_API int lua_dofile(lua_State *L, const char *filename);
-LUA_API int lua_dostring(lua_State *L, const char *str);
-LUA_API int lua_dobuffer(lua_State *L, const char *buff, size_t size, const char *name);
+LUA_API  int lua_dofile(lua_State *L, const char *filename);
+LUA_API  int lua_dostring(lua_State *L, const char *str);
+LUA_API  int lua_dobuffer(lua_State *L, const char *buff, size_t size, const char *name);
 
 /*
  ** Garbage-collection functions
  */
-LUA_API int lua_getgcthreshold(lua_State *L);
-LUA_API int lua_getgccount(lua_State *L);
+LUA_API  int lua_getgcthreshold(lua_State *L);
+LUA_API  int lua_getgccount(lua_State *L);
 LUA_API void lua_setgcthreshold(lua_State *L, int newthreshold);
 
 /*
  ** miscellaneous functions
  */
-LUA_API int lua_newtag(lua_State *L);
-LUA_API int lua_copytagmethods(lua_State *L, int tagto, int tagfrom);
-LUA_API void lua_settag(lua_State *L, int tag);
+LUA_API   int lua_newtag(lua_State *L);
+LUA_API   int lua_copytagmethods(lua_State *L, int tagto, int tagfrom);
+LUA_API  void lua_settag(lua_State *L, int tag);
 
-LUA_API void lua_error(lua_State *L, const char *s);
+LUA_API  void lua_error(lua_State *L, const char *s);
 
-LUA_API void lua_unref(lua_State *L, int ref);
+LUA_API  void lua_unref(lua_State *L, int ref);
 
-LUA_API int lua_next(lua_State *L, int index);
-LUA_API int lua_getn(lua_State *L, int index);
+LUA_API   int lua_next(lua_State *L, int index);
+LUA_API   int lua_getn(lua_State *L, int index);
 
-LUA_API void lua_concat(lua_State *L, int n);
+LUA_API  void lua_concat(lua_State *L, int n);
 
 LUA_API void* lua_newuserdata(lua_State *L, size_t size);
 
@@ -173,20 +173,20 @@ LUA_API void* lua_newuserdata(lua_State *L, size_t size);
  ** ===============================================================
  */
 
-#define lua_pop(L,n)        lua_settop(L, -(n)-1)
+#define lua_pop(L,n)            lua_settop(L, -(n)-1)
 
-#define lua_register(L,n,f)    (lua_pushcfunction(L, f), lua_setglobal(L, n))
-#define lua_pushuserdata(L,u)    lua_pushusertag(L, u, 0)
-#define lua_pushcfunction(L,f)    lua_pushcclosure(L, f, 0)
-#define lua_clonetag(L,t)    lua_copytagmethods(L, lua_newtag(L), (t))
+#define lua_register(L,n,f)     (lua_pushcfunction(L, f), lua_setglobal(L, n))
+#define lua_pushuserdata(L,u)   lua_pushusertag(L, u, 0)
+#define lua_pushcfunction(L,f)  lua_pushcclosure(L, f, 0)
+#define lua_clonetag(L,t)       lua_copytagmethods(L, lua_newtag(L), (t))
 
-#define lua_isfunction(L,n)    (lua_type(L,n) == LUA_TFUNCTION)
-#define lua_istable(L,n)    (lua_type(L,n) == LUA_TTABLE)
-#define lua_isuserdata(L,n)    (lua_type(L,n) == LUA_TUSERDATA)
-#define lua_isnil(L,n)        (lua_type(L,n) == LUA_TNIL)
-#define lua_isnull(L,n)        (lua_type(L,n) == LUA_TNONE)
+#define lua_isfunction(L,n)     (lua_type(L,n) == LUA_TFUNCTION)
+#define lua_istable(L,n)        (lua_type(L,n) == LUA_TTABLE)
+#define lua_isuserdata(L,n)     (lua_type(L,n) == LUA_TUSERDATA)
+#define lua_isnil(L,n)          (lua_type(L,n) == LUA_TNIL)
+#define lua_isnull(L,n)         (lua_type(L,n) == LUA_TNONE)
 
-#define lua_getregistry(L)    lua_getref(L, LUA_REFREGISTRY)
+#define lua_getregistry(L)      lua_getref(L, LUA_REFREGISTRY)
 
 #endif
 

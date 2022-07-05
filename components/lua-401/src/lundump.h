@@ -23,13 +23,13 @@ int luaU_endianess(void);
 #define    SIGNATURE   "Lua"  /* ...followed by this signature */
 
 /* formats for error messages */
-#define SOURCE_FMT  "<%d:%.99s>"
-#define SOURCE      tf->lineDefined,tf->source->str
-#define IN_FMT      " in %p " SOURCE_FMT
-#define IN          tf,SOURCE
+#define SOURCE_FMT     "<%d:%.99s>"
+#define SOURCE         tf->lineDefined,tf->source->str
+#define IN_FMT         " in %p " SOURCE_FMT
+#define IN             tf,SOURCE
 
 /* a multiple of PI for testing native format */
 /* multiplying by 1E8 gives non-trivial integer values */
-#define TEST_NUMBER 3.14159265358979323846E8
+#define TEST_NUMBER    3.14159265358979323846E8
 
 #endif

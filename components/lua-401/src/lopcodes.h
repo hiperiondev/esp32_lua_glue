@@ -43,25 +43,25 @@
  ** the following macros help to manipulate instructions
  */
 
-#define CREATE_0(o)     ((Instruction)(o))
+#define CREATE_0(o)      ((Instruction)(o))
 #define GET_OPCODE(i)    ((OpCode)((i)&MASK1(SIZE_OP,0)))
-#define SET_OPCODE(i,o)    ((i) = (((i)&MASK0(SIZE_OP,0)) | (Instruction)(o)))
+#define SET_OPCODE(i,o)  ((i) = (((i)&MASK0(SIZE_OP,0)) | (Instruction)(o)))
 
-#define CREATE_U(o,u)     ((Instruction)(o) | ((Instruction)(u)<<POS_U))
-#define GETARG_U(i)    ((int)((i)>>POS_U))
+#define CREATE_U(o,u)    ((Instruction)(o) | ((Instruction)(u)<<POS_U))
+#define GETARG_U(i)      ((int)((i)>>POS_U))
 #define SETARG_U(i,u)    ((i) = (((i)&MASK0(SIZE_U,POS_U)) | \
                                ((Instruction)(u)<<POS_U)))
 
 #define CREATE_S(o,s)    CREATE_U((o),(s)+MAXARG_S)
-#define GETARG_S(i)    (GETARG_U(i)-MAXARG_S)
+#define GETARG_S(i)      (GETARG_U(i)-MAXARG_S)
 #define SETARG_S(i,s)    SETARG_U((i),(s)+MAXARG_S)
 
 #define CREATE_AB(o,a,b) ((Instruction)(o) | ((Instruction)(a)<<POS_A) \
                                            |  ((Instruction)(b)<<POS_B))
-#define GETARG_A(i)    ((int)((i)>>POS_A))
+#define GETARG_A(i)      ((int)((i)>>POS_A))
 #define SETARG_A(i,a)    ((i) = (((i)&MASK0(SIZE_A,POS_A)) | \
                                ((Instruction)(a)<<POS_A)))
-#define GETARG_B(i)    ((int)(((i)>>POS_B) & MASK1(SIZE_B,0)))
+#define GETARG_B(i)      ((int)(((i)>>POS_B) & MASK1(SIZE_B,0)))
 #define SETARG_B(i,b)    ((i) = (((i)&MASK0(SIZE_B,POS_B)) | \
                                ((Instruction)(b)<<POS_B)))
 

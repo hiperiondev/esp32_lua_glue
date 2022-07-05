@@ -7,6 +7,8 @@
 #ifndef llex_h
 #define llex_h
 
+#include "lua_common.h"
+#ifdef INTERPRETER
 #include "lobject.h"
 #include "lzio.h"
 
@@ -79,10 +81,11 @@ typedef struct LexState {
 
 void luaX_init(lua_State *L);
 void luaX_setinput(lua_State *L, LexState *LS, ZIO *z, TString *source);
-int luaX_lex(LexState *LS, SemInfo *seminfo);
+ int luaX_lex(LexState *LS, SemInfo *seminfo);
 void luaX_checklimit(LexState *ls, int val, int limit, const char *msg);
 void luaX_syntaxerror(LexState *ls, const char *s, const char *token);
 void luaX_error(LexState *ls, const char *s, int token);
 void luaX_token2str(int token, char *s);
+#endif
 
 #endif

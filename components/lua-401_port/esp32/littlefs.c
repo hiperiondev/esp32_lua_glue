@@ -41,7 +41,7 @@
 #include "sdmmc_cmd.h"
 #include "driver/sdmmc_host.h"
 
-#include "common.h"
+#include "lua_common.h"
 #include "lua-401_port.h"
 #include "esp_littlefs.h"
 

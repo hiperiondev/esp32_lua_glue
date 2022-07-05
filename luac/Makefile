@@ -1,10 +1,8 @@
 # makefile for Lua compiler
 
-LUA= ../..
+LUA= ../components/lua401
 
-include $(LUA)/config
-
-INCS= -I$(INC) $(EXTRA_INCS) -I..
+INCS= -I.. -I$(LUA)/include -I$(LUA)/src
 OBJS= dump.o luac.o opt.o print.o stubs.o
 SRCS= dump.c luac.c opt.c print.c stubs.c luac.h print.h
 
@@ -12,11 +10,8 @@ T= $(BIN)/luac
 
 all: $T
 
-$T: $(OBJS) $(LIB)/liblua.a
-	$(CC) -o $@ $(OBJS) -L$(LIB) -llua
-
-$(LIB)/liblua.a:
-	cd ..; $(MAKE)
+$T: $(OBJS)
+	gcc -o $@ $(OBJS) -L$(LIB) -I$(LUA)/include -I$(LUA)/src
 
 clean:
 	rm -f $(OBJS) $T

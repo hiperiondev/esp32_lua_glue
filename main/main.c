@@ -32,7 +32,7 @@
 
 #include "lua.h"
 #include "lualib.h"
-#include "common.h"
+#include "lua_common.h"
 #include "lua-401_port.h"
 
 struct Options {
@@ -48,6 +48,7 @@ void lua_task(void *pvParameter) {
     opt.toclose = 0;
     opt.stacksize = 0;
     L = lua_open(opt.stacksize);
+
     lua_baselibopen(L);
     lua_iolibopen(L);
     lua_strlibopen(L);
@@ -68,8 +69,9 @@ void lua_task(void *pvParameter) {
     lua_datalib_validationopen(L);
     l_uart_start();
 
+#ifdef INTERPRETER
     char *buffer = NULL;
-
+#endif
     lua_dofile(L, "boot.lc");
 
     while (1) {

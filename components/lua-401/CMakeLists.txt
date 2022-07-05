@@ -8,6 +8,8 @@ idf_component_register(
     SRCS ${SOURCES}
     INCLUDE_DIRS
         include
+    REQUIRES
+        lua-401_port        
 )
 
 component_compile_options("-Wno-unused-label")

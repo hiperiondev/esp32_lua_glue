@@ -172,12 +172,12 @@ extern const char *const luaO_typenames[];
 #define luaO_typename(o)    (luaO_typenames[ttype(o)])
 
 lint32 luaO_power2(lint32 n);
-char* luaO_openspace(lua_State *L, size_t n);
+ char* luaO_openspace(lua_State *L, size_t n);
 
-int luaO_equalObj(const TObject *t1, const TObject *t2);
-int luaO_str2d(const char *s, Number *result);
+   int luaO_equalObj(const TObject *t1, const TObject *t2);
+   int luaO_str2d(const char *s, Number *result);
 
-void luaO_verror(lua_State *L, const char *fmt, ...);
-void luaO_chunkid(char *out, const char *source, int len);
+  void luaO_verror(lua_State *L, const char *fmt, ...);
+  void luaO_chunkid(char *out, const char *source, int len);
 
 #endif

@@ -8,14 +8,18 @@
 
 #include "lua.h"
 
+#include "lua_common.h"
 #include "lcode.h"
 #include "ldo.h"
 #include "llex.h"
 #include "lmem.h"
 #include "lobject.h"
 #include "lopcodes.h"
+#ifdef INTERPRETER
 #include "lparser.h"
+#endif
 
+#ifdef INTERPRETER
 void luaK_error(LexState *ls, const char *msg) {
     luaX_error(ls, msg, ls->t.token);
 }
@@ -655,6 +659,7 @@ int luaK_code2(FuncState *fs, OpCode o, int arg1, int arg2) {
     fs->f->code[fs->pc] = i;
     return fs->pc++;
 }
+#endif
 
 const struct OpProperties luaK_opproperties[NUM_OPCODES] = {
         { iO, 0, 0 },   /* OP_END */

@@ -47,7 +47,7 @@ extern const char *const luaT_eventname[];
 
 void luaT_init(lua_State *L);
 void luaT_realtag(lua_State *L, int tag);
-int luaT_tag(const TObject *o);
-int luaT_validevent(int t, int e); /* used by compatibility module */
+ int luaT_tag(const TObject *o);
+ int luaT_validevent(int t, int e); /* used by compatibility module */
 
 #endif

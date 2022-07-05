@@ -26,31 +26,19 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef LUA25_PORT_H_
-#define LUA25_PORT_H_
-
-//#include "sd.h"
-#include "littlefs.h"
+#ifndef LUA401_PORT_H_
+#define LUA401_PORT_H_
 
 #define MOUNT_POINT           "/littlefs"
 #define PARTITION_LABEL       "littlefs"
 
-/*
-#define FS_INIT               sd_init()
-#define FOPEN(FN, OT)         sd_fopen(FN, OT)
-#define FREOPEN(FN, OT, ST)   sd_freopen(FN, OT, ST)
-#define REMOVE(FN)            sd_remove(FN)
-#define RENAME(ON, NN)        sd_rename(ON, NN)
-*/
-#define FS_INIT               littlefs_init()
-#define F_OPEN(FN, OT)        littlefs_fopen(FN, OT)
-#define F_REOPEN(FN, OT, ST)  littlefs_freopen(FN, OT, ST)
-#define F_REMOVE(FN)          littlefs_remove(FN)
-#define F_RENAME(ON, NN)      littlefs_rename(ON, NN)
-#define F_LS                  littlefs_ls()
+#include <stdio.h>
+#include <stdlib.h>
 
-#define UART_START            l_uart_start()
-#define UART_STOP             l_uart_stop()
-#define UART_SEND(DT)         l_uart_send(DT)
+#define F_OPEN(FN, OT)        popen(FN, OT)
+#define F_REOPEN(FN, OT, ST)  freopen(FN, OT, ST)
+#define F_REMOVE(FN)          remove(FN)
+#define F_RENAME(ON, NN)      rename(ON, NN)
+
 
 #endif /* LUA25_PORT_H_ */

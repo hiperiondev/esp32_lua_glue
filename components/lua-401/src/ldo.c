@@ -11,12 +11,16 @@
 
 #include "lua.h"
 
+#include "lua_common.h"
+#include "lua-401_port.h"
 #include "ldebug.h"
 #include "ldo.h"
 #include "lgc.h"
 #include "lmem.h"
 #include "lobject.h"
+#ifdef INTERPRETER
 #include "lparser.h"
+#endif
 #include "lstate.h"
 #include "lstring.h"
 #include "ltable.h"
@@ -214,9 +218,14 @@ struct ParserS { /* data to `f_parser' */
     int bin;
 };
 
+
 static void f_parser(lua_State *L, void *ud) {
     struct ParserS *p = (struct ParserS*) ud;
+#ifdef INTERPRETER
     Proto *tf = p->bin ? luaU_undump(L, p->z) : luaY_parser(L, p->z);
+#else
+    Proto *tf = p->bin ? luaU_undump(L, p->z) : NULL;
+#endif
     luaV_Lclosure(L, tf, 0);
 }
 
@@ -244,14 +253,14 @@ static int parse_file(lua_State *L, const char *filename) {
     int status;
     int bin; /* flag for file mode */
     int c; /* look ahead char */
-    FILE *f = (filename == NULL) ? stdin : fopen(filename, "r");
+    FILE *f = (filename == NULL) ? stdin : F_OPEN(filename, "r");
     if (f == NULL)
         return LUA_ERRFILE; /* unable to open file */
     c = fgetc(f);
     ungetc(c, f);
     bin = (c == ID_CHUNK);
     if (bin && f != stdin) {
-        f = freopen(filename, "rb", f); /* set binary mode */
+        f = F_REOPEN(filename, "rb", f); /* set binary mode */
         if (f == NULL)
             return LUA_ERRFILE; /* unable to reopen file */
     }
@@ -267,6 +276,7 @@ static int parse_file(lua_State *L, const char *filename) {
         fclose(f);
     return status;
 }
+
 
 LUA_API int lua_dofile(lua_State *L, const char *filename) {
     int status = parse_file(L, filename);
@@ -338,6 +348,9 @@ void luaD_breakrun(lua_State *L, int errcode) {
 }
 
 int luaD_runprotected(lua_State *L, void (*f)(lua_State*, void*), void *ud) {
+    if (f == NULL)
+        return -1;
+
     StkId oldCbase = L->Cbase;
     StkId oldtop = L->top;
     struct lua_longjmp lj;
@@ -358,4 +371,3 @@ int luaD_runprotected(lua_State *L, void (*f)(lua_State*, void*), void *ud) {
 }
 
 /* }====================================================== */
-

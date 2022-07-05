@@ -11,6 +11,7 @@
 
 #include "lua.h"
 
+#include "lua_common.h"
 #include "lauxlib.h"
 #include "luadebug.h"
 #include "lualib.h"
@@ -218,6 +219,7 @@ static int luaB_next(lua_State *L) {
     }
 }
 
+#ifdef INTERPRETER
 static int passresults(lua_State *L, int status, int oldtop) {
     static const char *const errornames[] = { "ok", "run-time error", "file error", "syntax error", "memory error", "error in error handling" };
     if (status == 0) {
@@ -234,7 +236,6 @@ static int passresults(lua_State *L, int status, int oldtop) {
         return 2;
     }
 }
-
 static int luaB_dostring(lua_State *L) {
     int oldtop = lua_gettop(L);
     size_t l;
@@ -249,6 +250,7 @@ static int luaB_dofile(lua_State *L) {
     const char *fname = luaL_opt_string(L, 1, NULL);
     return passresults(L, lua_dofile(L, fname), oldtop);
 }
+#endif
 
 static int luaB_call(lua_State *L) {
     int oldtop;
@@ -580,8 +582,10 @@ static const struct luaL_reg base_funcs[] = {
         { "call"          , luaB_call           },
         { "collectgarbage", luaB_collectgarbage },
         { "copytagmethods", luaB_copytagmethods },
+#ifdef INTERPRETER
         { "dofile"        , luaB_dofile         },
         { "dostring"      , luaB_dostring       },
+#endif
         { "error"         , luaB_error          },
         { "foreach"       , luaB_foreach        },
         { "foreachi"      , luaB_foreachi       },

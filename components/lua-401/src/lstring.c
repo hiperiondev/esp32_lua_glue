@@ -138,4 +138,3 @@ TString* luaS_newfixed(lua_State *L, const char *str) {
         ts->marked = FIXMARK; /* avoid GC */
     return ts;
 }
-

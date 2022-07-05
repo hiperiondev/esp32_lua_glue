@@ -3,6 +3,9 @@
  ** Lexical Analyzer
  ** See Copyright Notice in lua.h
  */
+#include "lua_common.h"
+
+#ifdef INTERPRETER
 
 #include <ctype.h>
 #include <stdio.h>
@@ -446,4 +449,9 @@ int luaX_lex(LexState *LS, SemInfo *seminfo) {
                 }
         }
     }
+
+    return 0;
 }
+
+#endif
+

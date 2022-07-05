@@ -9,6 +9,7 @@
 
 #include "lua.h"
 
+#include "lua_common.h"
 #include "lcode.h"
 #include "lfunc.h"
 #include "llex.h"
@@ -18,6 +19,8 @@
 #include "lparser.h"
 #include "lstate.h"
 #include "lstring.h"
+
+#ifdef INTERPRETER
 
 /*
  ** Constructors descriptor:
@@ -1066,4 +1069,4 @@ static void chunk(LexState *ls) {
                 "stack size != # local vars");
     }
 }
-
+#endif

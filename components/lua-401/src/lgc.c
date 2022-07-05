@@ -17,7 +17,7 @@
 #include "ltm.h"
 
 typedef struct GCState {
-    Hash *tmark; /* list of marked tables to be visited */
+       Hash *tmark; /* list of marked tables to be visited */
     Closure *cmark; /* list of marked closures to be visited */
 } GCState;
 
@@ -321,4 +321,3 @@ void luaC_checkGC(lua_State *L) {
     if (L->nblocks >= L->GCthreshold)
         luaC_collectgarbage(L);
 }
-

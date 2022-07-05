@@ -4,6 +4,7 @@
  ** See Copyright Notice in lua.h
  */
 
+#ifdef LUA_DEBUG
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,9 +31,6 @@ void luaB_opentests(lua_State *L);
 /*
  ** The whole module only makes sense with LUA_DEBUG on
  */
-#ifdef LUA_DEBUG
-
-
 
 static void setnameval (lua_State *L, const char *name, int val) {
   lua_pushstring(L, name);
@@ -40,25 +38,63 @@ static void setnameval (lua_State *L, const char *name, int val) {
   lua_settable(L, -3);
 }
 
-
 /*
 ** {======================================================
 ** Disassembler
 ** =======================================================
 */
 
-
 static const char *const instrname[NUM_OPCODES] = {
-  "END", "RETURN", "CALL", "TAILCALL", "PUSHNIL", "POP", "PUSHINT", 
-  "PUSHSTRING", "PUSHNUM", "PUSHNEGNUM", "PUSHUPVALUE", "GETLOCAL", 
-  "GETGLOBAL", "GETTABLE", "GETDOTTED", "GETINDEXED", "PUSHSELF", 
-  "CREATETABLE", "SETLOCAL", "SETGLOBAL", "SETTABLE", "SETLIST", "SETMAP", 
-  "ADD", "ADDI", "SUB", "MULT", "DIV", "POW", "CONCAT", "MINUS", "NOT", 
-  "JMPNE", "JMPEQ", "JMPLT", "JMPLE", "JMPGT", "JMPGE", "JMPT", "JMPF", 
-  "JMPONT", "JMPONF", "JMP", "PUSHNILJMP", "FORPREP", "FORLOOP", "LFORPREP", 
-  "LFORLOOP", "CLOSURE"
+  "END",
+  "RETURN",
+  "CALL",
+  "TAILCALL",
+  "PUSHNIL",
+  "POP",
+  "PUSHINT",
+  "PUSHSTRING",
+  "PUSHNUM",
+  "PUSHNEGNUM",
+  "PUSHUPVALUE",
+  "GETLOCAL",
+  "GETGLOBAL",
+  "GETTABLE",
+  "GETDOTTED",
+  "GETINDEXED",
+  "PUSHSELF",
+  "CREATETABLE",
+  "SETLOCAL",
+  "SETGLOBAL",
+  "SETTABLE",
+  "SETLIST",
+  "SETMAP",
+  "ADD",
+  "ADDI",
+  "SUB",
+  "MULT",
+  "DIV",
+  "POW",
+  "CONCAT",
+  "MINUS",
+  "NOT",
+  "JMPNE",
+  "JMPEQ",
+  "JMPLT",
+  "JMPLE",
+  "JMPGT",
+  "JMPGE",
+  "JMPT",
+  "JMPF",
+  "JMPONT",
+  "JMPONF",
+  "JMP",
+  "PUSHNILJMP",
+  "FORPREP",
+  "FORLOOP",
+  "LFORPREP",
+  "LFORLOOP",
+  "CLOSURE"
 };
-
 
 static int pushop (lua_State *L, Proto *p, int pc) {
   char buff[100];
@@ -84,7 +120,6 @@ static int pushop (lua_State *L, Proto *p, int pc) {
   return (o != OP_END);
 }
 
-
 static int listcode (lua_State *L) {
   int pc;
   Proto *p;
@@ -104,7 +139,6 @@ static int listcode (lua_State *L) {
   return 1;
 }
 
-
 static int liststrings (lua_State *L) {
   Proto *p;
   int i;
@@ -120,7 +154,6 @@ static int liststrings (lua_State *L) {
   return 1;
 }
 
-
 static int listlocals (lua_State *L) {
   Proto *p;
   int pc = luaL_check_int(L, 2) - 1;
@@ -135,7 +168,6 @@ static int listlocals (lua_State *L) {
 }
 
 /* }====================================================== */
-
 
 
 static int get_limits (lua_State *L) {
@@ -159,7 +191,6 @@ static int get_limits (lua_State *L) {
   return 1;
 }
 
-
 static int mem_query (lua_State *L) {
   if (lua_isnull(L, 1)) {
     lua_pushnumber(L, memdebug_total);
@@ -172,7 +203,6 @@ static int mem_query (lua_State *L) {
     return 0;
   }
 }
-
 
 static int hash_query (lua_State *L) {
   if (lua_isnull(L, 2)) {
@@ -187,7 +217,6 @@ static int hash_query (lua_State *L) {
   }
   return 1;
 }
-
 
 static int table_query (lua_State *L) {
   const Hash *t;
@@ -212,7 +241,6 @@ static int table_query (lua_State *L) {
   return 0;
 }
 
-
 static int string_query (lua_State *L) {
   stringtable *tb = (*luaL_check_string(L, 1) == 's') ? &L->strt : &L->udt;
   int s = luaL_opt_int(L, 2, 0) - 1;
@@ -234,7 +262,6 @@ static int string_query (lua_State *L) {
   }
   return 0;
 }
-
 
 static int tref (lua_State *L) {
   luaL_checkany(L, 1);
@@ -337,8 +364,6 @@ static int equal (lua_State *L) {
   return pushbool(L, lua_equal(L, 1, 2));
 }
 
-  
-
 /*
 ** {======================================================
 ** function to test the API with C. It interprets a kind of "assembler"
@@ -378,7 +403,6 @@ static const char *getname (char *buff, const char **pc) {
   buff[i] = '\0';
   return buff;
 }
-
 
 #define EQ(s1)    (strcmp(s1, inst) == 0)
 
@@ -500,8 +524,6 @@ static int testC (lua_State *L) {
 
 /* }====================================================== */
 
-
-
 static const struct luaL_reg tests_funcs[] = {
   {"hash", hash_query},
   {"limits", get_limits},
@@ -524,7 +546,6 @@ static const struct luaL_reg tests_funcs[] = {
   {"equal", equal},
   {"totalmem", mem_query}
 };
-
 
 void luaB_opentests (lua_State *L) {
   lua_newtable(L);

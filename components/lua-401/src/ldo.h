@@ -24,6 +24,6 @@ void luaD_callTM(lua_State *L, Closure *f, int nParams, int nResults);
 void luaD_checkstack(lua_State *L, int n);
 
 void luaD_breakrun(lua_State *L, int errcode);
-int luaD_runprotected(lua_State *L, void (*f)(lua_State*, void*), void *ud);
+ int luaD_runprotected(lua_State *L, void (*f)(lua_State*, void*), void *ud);
 
 #endif
