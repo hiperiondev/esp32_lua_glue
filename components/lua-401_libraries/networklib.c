@@ -48,21 +48,6 @@
 #include "tftp_server.h"
 #include "wifi.h"
 #include "nvs_flash.h"
-#include "sshd_task.h"
-
-static int networklib_sshd_start(lua_State *L) {
-    if (!wifi_connected) {
-        lua_error(L, "network not connected");
-        return 0;
-    }
-    start_sshd();
-    return 0;
-}
-
-static int networklib_sshd_stop(lua_State *L) {
-    stop_sshd();
-    return 0;
-}
 
 static int networklib_tftpd_start(lua_State *L) {
     if (!wifi_connected) {
@@ -121,8 +106,6 @@ static int networklib_myip(lua_State *L) {
 static const struct luaL_reg esplib[] = {
         { "tftpd_start"    , networklib_tftpd_start     },
         { "tftpd_stop"     , networklib_tftpd_stop      },
-        { "sshd_start"     , networklib_sshd_start      },
-        { "sshd_stop"      , networklib_sshd_stop       },
         { "wifi_connect"   , networklib_wifi_connect    },
         { "wifi_disconnect", networklib_wifi_disconnect },
         { "wifi_scan"      , networklib_wifi_scan       },

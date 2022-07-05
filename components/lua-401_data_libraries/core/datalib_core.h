@@ -167,8 +167,9 @@ typedef struct {
 #define ANY_REAL(x)              (x == DATA_TYPE_REAL || x == DATA_TYPE_LREAL)
 #define ANY_STRING(x)            (x == DATA_TYPE_STRING || x == DATA_TYPE_WSTRING)
 #define ANY_ELEMENTARY(x)        (ANY_BIT(x) || ANY_NUM(x) || ANY_DATE(x) || ANY_STRING(x) || x == DATA_TYPE_TIME)
-#define ANY_MAGNITUDE(x)         (x < 0x0d && !x == DATA_TYPE_NULL)
-#define ANY_INT(x)               (x < 0x0a && !x == DATA_TYPE_NULL)
+#define ANY_MAGNITUDE(x)         ((x < 0x0d) && !(x == DATA_TYPE_NULL))
+#define ANY_INT(x)               ((x < 0x0a) && !(x == DATA_TYPE_NULL))
+#define ANY_INTEGRAL(x)          (ANY_INT(x) || ANY_BIT(x))
 
 #define GET_BIT(v, b)            ((v >> b) & 1)
 #define SET_BIT(v, b)            ((v) | (1 << b))
@@ -296,10 +297,15 @@ typedef struct {
                     data->time = value->time; \
                     break; \
                 case DATA_TYPE_DATE: \
-                    ; \
+				    data->date.date.day = value->date.date.day; \
+				    data->date.date.month = value->date.date.month; \
+				    data->date.date.year = value->date.date.year; \
                     break; \
                 case DATA_TYPE_TOD: \
-                    ; \
+				    data->tod.tod.csec = value->tod.tod.csec; \
+				    data->tod.tod.hour = value->tod.tod.hour; \
+				    data->tod.tod.min = value->tod.tod.min; \
+				    data->tod.tod.sec =  value->tod.tod.sec;\
                     break; \
                 case DATA_TYPE_DT: \
                     ; \

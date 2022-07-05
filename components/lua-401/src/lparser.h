@@ -15,7 +15,10 @@
  */
 
 typedef enum {
-    VGLOBAL, VLOCAL, VINDEXED, VEXP
+    VGLOBAL,
+    VLOCAL,
+    VINDEXED,
+    VEXP
 } expkind;
 
 typedef struct expdesc {
