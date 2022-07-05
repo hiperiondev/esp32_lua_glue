@@ -32,7 +32,4 @@
 #define INTERPRETER 1 // enable interpreter and compiler
 #define GC          1 // enable garbage collector
 
-#define PRINTF(...) printf(__VA_ARGS__)
-#define EXIT(EN)    printf("exit not allowed: %d\n", EN)
-
 #endif /* COMMON_H_ */

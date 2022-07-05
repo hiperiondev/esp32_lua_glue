@@ -40,5 +40,7 @@
 #define F_REMOVE(FN)          remove(FN)
 #define F_RENAME(ON, NN)      rename(ON, NN)
 
+#define PRINTF(...) printf(__VA_ARGS__)
+#define EXIT(EN)    printf("exit not allowed: %d\n", EN)
 
-#endif /* LUA25_PORT_H_ */
+#endif /* LUA401_PORT_H_ */

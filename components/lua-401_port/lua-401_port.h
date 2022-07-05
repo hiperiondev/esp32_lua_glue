@@ -41,10 +41,6 @@
 #define F_RENAME(ON, NN)      littlefs_rename(ON, NN)
 #define F_LS                  littlefs_ls()
 
-#define UART_START            l_uart_start()
-#define UART_STOP             l_uart_stop()
-#define UART_SEND(DT)         l_uart_send(DT)
-
 #define PRINTF(...) printf(__VA_ARGS__)
 #define EXIT(EN)    printf("exit not allowed: %d\n", EN)
 
