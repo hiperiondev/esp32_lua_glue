@@ -94,7 +94,7 @@ void littlefs_deinit(void) {
     ESP_LOGI(TAG, "LittleFS unmounted");
 }
 
-FILE* littlefs_fopen(char *file, const char *mode) {
+FILE* littlefs_fopen(const char *file, const char *mode) {
     if (!littlefs_initialized)
             return NULL;
     char route[512];
@@ -119,7 +119,7 @@ int littlefs_test(char *file) {
     return stat(route, &st);
 }
 
-int littlefs_remove(char *file) {
+int littlefs_remove(const char *file) {
     if (!littlefs_initialized)
             return -1;
     char route[512];
@@ -133,7 +133,7 @@ int littlefs_remove(char *file) {
     return -1;
 }
 
-int littlefs_rename(char *file, char *newname) {
+int littlefs_rename(const char *file, char *newname) {
     if (!littlefs_initialized)
             return -1;
     char route_old[512];

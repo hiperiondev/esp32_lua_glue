@@ -33,11 +33,11 @@
 
   int littlefs_init(void);
  void littlefs_deinit(void);
-FILE* littlefs_fopen(char *file, const char *mode);
+FILE* littlefs_fopen(const char *file, const char *mode);
 FILE* littlefs_freopen(const char *filename, const char *opentype, FILE *stream);
   int littlefs_test(char *file);
-  int littlefs_remove(char *file);
-  int littlefs_rename(char *file, char *newname);
+  int littlefs_remove(const char *file);
+  int littlefs_rename(const char *file, char *newname);
  void littlefs_ls(void);
 
 #endif /* LITTLEFS_H_ */

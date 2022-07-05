@@ -26,22 +26,14 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef LUA-401_PORT_H_
-#define LUA-401_PORT_H_
+#ifndef LUA_401_PORT_H_
+#define LUA_401_PORT_H_
 
-//#include "sd.h"
 #include "littlefs.h"
 
 #define MOUNT_POINT           "/littlefs"
 #define PARTITION_LABEL       "littlefs"
 
-/*
-#define FS_INIT               sd_init()
-#define FOPEN(FN, OT)         sd_fopen(FN, OT)
-#define FREOPEN(FN, OT, ST)   sd_freopen(FN, OT, ST)
-#define REMOVE(FN)            sd_remove(FN)
-#define RENAME(ON, NN)        sd_rename(ON, NN)
-*/
 #define FS_INIT               littlefs_init()
 #define F_OPEN(FN, OT)        littlefs_fopen(FN, OT)
 #define F_REOPEN(FN, OT, ST)  littlefs_freopen(FN, OT, ST)
@@ -53,4 +45,7 @@
 #define UART_STOP             l_uart_stop()
 #define UART_SEND(DT)         l_uart_send(DT)
 
-#endif /* LUA-401_PORT_H_ */
+#define PRINTF(...) printf(__VA_ARGS__)
+#define EXIT(EN)    printf("exit not allowed: %d\n", EN)
+
+#endif /* LUA_401_PORT_H_ */

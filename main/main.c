@@ -30,10 +30,14 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
 #include "lua.h"
 #include "lualib.h"
 #include "lua_common.h"
 #include "lua-401_port.h"
+#include "uart.h"
 
 struct Options {
   int toclose;
