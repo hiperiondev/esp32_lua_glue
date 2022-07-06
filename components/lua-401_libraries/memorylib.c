@@ -110,11 +110,9 @@ static int memorylib_tasks_info(lua_State *L) {
 
 LUALIB_API void lua_memorylibopen(lua_State *L) {
     lua_newtable(L);
-
     SET_TABLE_FUNCTION("minimum_free_heap_size", memorylib_minimum_free_heap_size);
     SET_TABLE_FUNCTION("free_heap_size"        , memorylib_free_heap_size);
     SET_TABLE_FUNCTION("reset_reason"          , memorylib_reset_reason);
     SET_TABLE_FUNCTION("tasks_info"            , memorylib_tasks_info);
-
     lua_setglobal(L, "mem");
 }

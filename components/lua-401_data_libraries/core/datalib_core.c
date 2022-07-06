@@ -98,6 +98,7 @@ static int datalib_var_get(lua_State *L) {
             lua_pushnumber(L, 1);
         else
             lua_pushnil(L);
+        goto end;
     }
 
     if (!strcmp(i, "is_anybit")) {
@@ -139,7 +140,7 @@ static int datalib_var_get(lua_State *L) {
         goto end;
     }
 
-    if (!strcmp(i, "val")) {
+    if (!strcmp(i, "v")) {
         switch (data->type) {
             case DATA_TYPE_NULL:
             case DATA_TYPE_NIL:
@@ -458,13 +459,11 @@ static int datalib_clearbit(lua_State *L) {
     return 0;
 }
 
-static const struct luaL_reg datalib_core[] = {
-        { "new"             , datalib_var_new          },
-        { "getbit"          , datalib_getbit           },
-        { "setbit"          , datalib_setbit           },
-        { "clearbit"        , datalib_clearbit         },
-};
-
 LUALIB_API void lua_datalib_coreopen(lua_State *L) {
-    luaL_openl(L, datalib_core);
+    lua_newtable(L);
+    SET_TABLE_FUNCTION("new"     , datalib_var_new);
+    SET_TABLE_FUNCTION("getbit"  , datalib_getbit);
+    SET_TABLE_FUNCTION("setbit"  , datalib_setbit);
+    SET_TABLE_FUNCTION("clearbit", datalib_clearbit);
+    lua_setglobal(L, "var");
 }
