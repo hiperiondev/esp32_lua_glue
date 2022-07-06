@@ -45,10 +45,8 @@ static int datalib_7(lua_State *L) {
     return 0;
 }
 
-static const struct luaL_reg datalib_string[] = {
-        { "" ,  datalib_7 },
-};
-
 LUALIB_API void lua_datalib_stringopen(lua_State *L) {
-    luaL_openl(L, datalib_string);
+    lua_getglobal(L, "var");
+    SET_TABLE_FUNCTION("string", datalib_7);
+    lua_setglobal(L, "var");
 }

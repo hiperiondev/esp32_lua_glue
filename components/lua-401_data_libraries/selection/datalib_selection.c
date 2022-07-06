@@ -65,16 +65,13 @@ static int datalib_mux(lua_State *L) {
     return 0;
 }
 
-
-static const struct luaL_reg datalib_selection[] = {
-        { "_move"  ,datalib_move  },
-        { "_sel"   ,datalib_sel   },
-        { "_max"   ,datalib_max   },
-        { "_min"   ,datalib_min   },
-        { "_limit" ,datalib_limit },
-        { "_mux"   ,datalib_mux   }
-};
-
 LUALIB_API void lua_datalib_selectionopen(lua_State *L) {
-    luaL_openl(L, datalib_selection);
+    lua_getglobal(L, "var");
+    SET_TABLE_FUNCTION("move" , datalib_move);
+    SET_TABLE_FUNCTION("sel"  , datalib_sel);
+    SET_TABLE_FUNCTION("max"  , datalib_max);
+    SET_TABLE_FUNCTION("min"  , datalib_min);
+    SET_TABLE_FUNCTION("limit", datalib_limit);
+    SET_TABLE_FUNCTION("mux"  , datalib_mux);
+    lua_setglobal(L, "var");
 }

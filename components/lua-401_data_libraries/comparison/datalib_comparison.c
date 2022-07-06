@@ -65,15 +65,13 @@ static int datalib_ne(lua_State *L) {
     return 0;
 }
 
-static const struct luaL_reg datalib_comparision[] = {
-        { "_gt" ,  datalib_gt },
-        { "_ge" ,  datalib_ge },
-        { "_eq" ,  datalib_eq },
-        { "_le" ,  datalib_le },
-        { "_lt" ,  datalib_lt },
-        { "_ne" ,  datalib_ne },
-};
-
 LUALIB_API void lua_datalib_comparisonopen(lua_State *L) {
-    luaL_openl(L, datalib_comparision);
+    lua_getglobal(L, "var");
+    SET_TABLE_FUNCTION("gt", datalib_gt);
+    SET_TABLE_FUNCTION("ge", datalib_ge);
+    SET_TABLE_FUNCTION("eq", datalib_eq);
+    SET_TABLE_FUNCTION("le", datalib_le);
+    SET_TABLE_FUNCTION("lt", datalib_lt);
+    SET_TABLE_FUNCTION("ne", datalib_ne);
+    lua_setglobal(L, "var");
 }

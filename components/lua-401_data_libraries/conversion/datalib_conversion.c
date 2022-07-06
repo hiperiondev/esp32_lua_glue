@@ -45,10 +45,8 @@ static int datalib_3(lua_State *L) {
     return 0;
 }
 
-static const struct luaL_reg datalib_conversion[] = {
-        { "" ,  datalib_3 },
-};
-
 LUALIB_API void lua_datalib_conversionopen(lua_State *L) {
-    luaL_openl(L, datalib_conversion);
+    lua_getglobal(L, "var");
+    SET_TABLE_FUNCTION("conversion", datalib_3);
+    lua_setglobal(L, "var");
 }

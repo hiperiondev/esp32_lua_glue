@@ -57,13 +57,11 @@ static int datalib_not(lua_State *L) {
     return 0;
 }
 
-static const struct luaL_reg datalib_bitwise_boolean[] = {
-        { "_and" ,  datalib_and },
-        { "_or"  ,  datalib_or  },
-        { "_xor" ,  datalib_xor },
-        { "_not" ,  datalib_not },
-};
-
 LUALIB_API void lua_datalib_bitwise_booleanopen(lua_State *L) {
-    luaL_openl(L, datalib_bitwise_boolean);
+    lua_getglobal(L, "var");
+    SET_TABLE_FUNCTION("and", datalib_and);
+    SET_TABLE_FUNCTION("or" , datalib_or);
+    SET_TABLE_FUNCTION("xor", datalib_xor);
+    SET_TABLE_FUNCTION("not", datalib_not);
+    lua_setglobal(L, "var");
 }

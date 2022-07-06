@@ -174,11 +174,11 @@ static int datalib_expt(lua_State *L) {
 
 LUALIB_API void lua_datalib_arithmeticopen(lua_State *L) {
     lua_getglobal(L, "var");
-    SET_TABLE_FUNCTION("add"  , datalib_add);
-    SET_TABLE_FUNCTION("mul"  , datalib_mul);
-    SET_TABLE_FUNCTION("sub"  , datalib_sub);
-    SET_TABLE_FUNCTION("div"  , datalib_div);
-    SET_TABLE_FUNCTION("mod"  , datalib_mod);
-    SET_TABLE_FUNCTION("expt" , datalib_expt);
+    SET_TABLE_FUNCTION("add" , datalib_add);
+    SET_TABLE_FUNCTION("mul" , datalib_mul);
+    SET_TABLE_FUNCTION("sub" , datalib_sub);
+    SET_TABLE_FUNCTION("div" , datalib_div);
+    SET_TABLE_FUNCTION("mod" , datalib_mod);
+    SET_TABLE_FUNCTION("expt", datalib_expt);
     lua_setglobal(L, "var");
 }

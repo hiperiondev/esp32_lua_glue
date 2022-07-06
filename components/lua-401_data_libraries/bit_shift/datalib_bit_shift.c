@@ -58,13 +58,11 @@ static int datalib_ror(lua_State *L) {
     return 0;
 }
 
-static const struct luaL_reg datalib_bit_shift[] = {
-        { "_shl" ,  datalib_shl },
-        { "_shr" ,  datalib_shr },
-        { "_rol" ,  datalib_rol },
-        { "_ror" ,  datalib_ror }
-};
-
 LUALIB_API void lua_datalib_bit_shiftopen(lua_State *L) {
-    luaL_openl(L, datalib_bit_shift);
+    lua_getglobal(L, "var");
+    SET_TABLE_FUNCTION("shl", datalib_shl);
+    SET_TABLE_FUNCTION("shr", datalib_shr);
+    SET_TABLE_FUNCTION("rol", datalib_rol);
+    SET_TABLE_FUNCTION("ror", datalib_ror);
+    lua_setglobal(L, "var");
 }

@@ -45,10 +45,8 @@ static int datalib_9(lua_State *L) {
     return 0;
 }
 
-static const struct luaL_reg datalib_validation[] = {
-        { "" ,  datalib_9 },
-};
-
 LUALIB_API void lua_datalib_validationopen(lua_State *L) {
-    luaL_openl(L, datalib_validation);
+    lua_getglobal(L, "var");
+    SET_TABLE_FUNCTION("validation", datalib_9);
+    lua_setglobal(L, "var");
 }

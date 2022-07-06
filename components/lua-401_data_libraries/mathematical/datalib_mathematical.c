@@ -89,21 +89,19 @@ static int datalib_atan2(lua_State *L) {
     return 0;
 }
 
-static const struct luaL_reg datalib_mathematical[] = {
-        { "_abs"   ,datalib_abs   },
-        { "_sqrt"  ,datalib_sqrt  },
-        { "_ln"    ,datalib_ln    },
-        { "_log"   ,datalib_log   },
-        { "_exp"   ,datalib_exp   },
-        { "_sin"   ,datalib_sin   },
-        { "_cos"   ,datalib_cos   },
-        { "_tan"   ,datalib_tan   },
-        { "_asin"  ,datalib_asin  },
-        { "_acos"  ,datalib_acos  },
-        { "_atan"  ,datalib_atan  },
-        { "_atan2" ,datalib_atan2 }
-};
-
 LUALIB_API void lua_datalib_mathematicalopen(lua_State *L) {
-    luaL_openl(L, datalib_mathematical);
+    lua_getglobal(L, "var");
+    SET_TABLE_FUNCTION("abs"  , datalib_abs);
+    SET_TABLE_FUNCTION("sqrt" , datalib_sqrt);
+    SET_TABLE_FUNCTION("ln"   , datalib_ln);
+    SET_TABLE_FUNCTION("log"  , datalib_log);
+    SET_TABLE_FUNCTION("exp"  , datalib_exp);
+    SET_TABLE_FUNCTION("sin"  , datalib_sin);
+    SET_TABLE_FUNCTION("cos"  , datalib_cos);
+    SET_TABLE_FUNCTION("tan"  , datalib_tan);
+    SET_TABLE_FUNCTION("asin" , datalib_asin);
+    SET_TABLE_FUNCTION("acos" , datalib_acos);
+    SET_TABLE_FUNCTION("atan" , datalib_atan);
+    SET_TABLE_FUNCTION("atan2", datalib_atan2);
+    lua_setglobal(L, "var");
 }

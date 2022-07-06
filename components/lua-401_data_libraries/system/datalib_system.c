@@ -65,16 +65,13 @@ static int datalib_sys_get_tod(lua_State *L) {
     return 0;
 }
 
-
-static const struct luaL_reg datalib_system[] = {
-        { "_sys_date_time_to_local" ,datalib_sys_date_time_to_local },
-        { "_sys_date_time_to_utc"   ,datalib_sys_date_time_to_utc   },
-        { "_sys_get_date"           ,datalib_sys_get_date           },
-        { "_sys_get_random_word"    ,datalib_sys_get_random_word    },
-        { "_sys_get_timestamp"      ,datalib_sys_get_timestamp      },
-        { "_sys_get_tod"            ,datalib_sys_get_tod            }
-};
-
 LUALIB_API void lua_datalib_systemopen(lua_State *L) {
-    luaL_openl(L, datalib_system);
+    lua_getglobal(L, "var");
+    SET_TABLE_FUNCTION("sys_date_time_to_local", datalib_sys_date_time_to_local);
+    SET_TABLE_FUNCTION("sys_date_time_to_utc"  , datalib_sys_date_time_to_utc);
+    SET_TABLE_FUNCTION("sys_get_date"          , datalib_sys_get_date);
+    SET_TABLE_FUNCTION("sys_get_random_word"   , datalib_sys_get_random_word);
+    SET_TABLE_FUNCTION("sys_get_timestamp"     , datalib_sys_get_timestamp);
+    SET_TABLE_FUNCTION("sys_get_tod"           , datalib_sys_get_tod);
+    lua_setglobal(L, "var");
 }
