@@ -42,50 +42,62 @@
 #include "datalib_mathematical.h"
 
 static int datalib_abs(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_sqrt(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_ln(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_log(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_exp(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_sin(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_cos(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_tan(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_asin(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_acos(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_atan(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_atan2(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 

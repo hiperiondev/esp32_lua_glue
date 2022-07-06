@@ -11,7 +11,6 @@ file(
             mathematical/*.c
             selection/*.c
             string/*.c
-            system/*.c
             validation/*.c
 )
 
@@ -28,7 +27,6 @@ idf_component_register(
         mathematical
         selection
         string
-        system
         validation
     REQUIRES
         lua-401

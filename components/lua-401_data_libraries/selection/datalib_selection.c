@@ -42,26 +42,32 @@
 #include "datalib_selection.h"
 
 static int datalib_move(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_sel(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_max(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_min(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_limit(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_mux(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 

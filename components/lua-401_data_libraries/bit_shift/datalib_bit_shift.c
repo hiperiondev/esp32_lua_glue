@@ -42,19 +42,22 @@
 #include "datalib_bit_shift.h"
 
 static int datalib_shl(lua_State *L) {
-
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_shr(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_rol(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_ror(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 

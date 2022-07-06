@@ -42,26 +42,32 @@
 #include "datalib_comparison.h"
 
 static int datalib_gt(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_ge(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_eq(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_le(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_lt(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_ne(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 

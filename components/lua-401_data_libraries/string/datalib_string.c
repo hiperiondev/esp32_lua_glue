@@ -42,6 +42,7 @@
 #include "datalib_string.h"
 
 static int datalib_7(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 

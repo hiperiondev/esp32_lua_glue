@@ -42,6 +42,7 @@
 #include "datalib_validation.h"
 
 static int datalib_9(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 

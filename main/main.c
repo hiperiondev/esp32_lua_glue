@@ -65,6 +65,7 @@ void lua_task(void *pvParameter) {
     lua_dblibopen(L);
     lua_networklibopen(L);
     lua_memorylibopen(L);
+    lua_systemopen(L);
     lua_datalib_coreopen(L);
     lua_datalib_arithmeticopen(L);
     lua_datalib_bit_shiftopen(L);
@@ -74,7 +75,6 @@ void lua_task(void *pvParameter) {
     lua_datalib_date_timeopen(L);
     lua_datalib_mathematicalopen(L);
     lua_datalib_stringopen(L);
-    lua_datalib_systemopen(L);
     lua_datalib_validationopen(L);
 
     lua_dofile(L, "boot.lc");

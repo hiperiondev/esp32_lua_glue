@@ -37,41 +37,46 @@
 #include "lua.h"
 #include "lauxlib.h"
 #include "lualib.h"
+#include "lua_common.h"
 #include "lua-401_port.h"
-#include "datalib_core.h"
-#include "datalib_system.h"
 
-static int datalib_sys_date_time_to_local(lua_State *L) {
+static int system_date_time_to_local(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
-static int datalib_sys_date_time_to_utc(lua_State *L) {
+static int system_date_time_to_utc(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
-static int datalib_sys_get_date(lua_State *L) {
+static int system_get_date(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
-static int datalib_sys_get_random_word(lua_State *L) {
+static int system_get_random_word(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
-static int datalib_sys_get_timestamp(lua_State *L) {
+static int system_get_timestamp(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
-static int datalib_sys_get_tod(lua_State *L) {
+static int system_get_tod(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
-LUALIB_API void lua_datalib_systemopen(lua_State *L) {
-    lua_getglobal(L, "var");
-    SET_TABLE_FUNCTION("sys_date_time_to_local", datalib_sys_date_time_to_local);
-    SET_TABLE_FUNCTION("sys_date_time_to_utc"  , datalib_sys_date_time_to_utc);
-    SET_TABLE_FUNCTION("sys_get_date"          , datalib_sys_get_date);
-    SET_TABLE_FUNCTION("sys_get_random_word"   , datalib_sys_get_random_word);
-    SET_TABLE_FUNCTION("sys_get_timestamp"     , datalib_sys_get_timestamp);
-    SET_TABLE_FUNCTION("sys_get_tod"           , datalib_sys_get_tod);
-    lua_setglobal(L, "var");
+LUALIB_API void lua_systemopen(lua_State *L) {
+    lua_newtable(L);
+    SET_TABLE_FUNCTION("date_time_to_local", system_date_time_to_local);
+    SET_TABLE_FUNCTION("date_time_to_utc"  , system_date_time_to_utc);
+    SET_TABLE_FUNCTION("get_date"          , system_get_date);
+    SET_TABLE_FUNCTION("get_random_word"   , system_get_random_word);
+    SET_TABLE_FUNCTION("get_timestamp"     , system_get_timestamp);
+    SET_TABLE_FUNCTION("get_tod"           , system_get_tod);
+    lua_setglobal(L, "sys");
 }

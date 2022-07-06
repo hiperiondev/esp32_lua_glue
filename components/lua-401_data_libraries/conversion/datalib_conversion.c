@@ -42,6 +42,7 @@
 #include "datalib_conversion.h"
 
 static int datalib_3(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 

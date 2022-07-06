@@ -42,18 +42,22 @@
 #include "datalib_bitwise_boolean.h"
 
 static int datalib_and(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_or(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_xor(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
 static int datalib_not(lua_State *L) {
+    lua_error(L, "not implemented yet");
     return 0;
 }
 
