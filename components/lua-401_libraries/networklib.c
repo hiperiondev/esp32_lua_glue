@@ -103,15 +103,6 @@ static int networklib_myip(lua_State *L) {
     return 1;
 }
 
-static const struct luaL_reg esplib[] = {
-        { "tftpd_start"    , networklib_tftpd_start     },
-        { "tftpd_stop"     , networklib_tftpd_stop      },
-        { "wifi_connect"   , networklib_wifi_connect    },
-        { "wifi_disconnect", networklib_wifi_disconnect },
-        { "wifi_scan"      , networklib_wifi_scan       },
-        { "myip"           , networklib_myip            }
-};
-
 LUALIB_API void lua_networklibopen(lua_State *L) {
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
@@ -119,5 +110,12 @@ LUALIB_API void lua_networklibopen(lua_State *L) {
         ret = nvs_flash_init();
     }
 
-    luaL_openl(L, esplib);
+    lua_newtable(L);
+    SET_TABLE_FUNCTION("tftpd_start"    , networklib_tftpd_start);
+    SET_TABLE_FUNCTION("tftpd_stop"     , networklib_tftpd_stop);
+    SET_TABLE_FUNCTION("wifi_connect"   , networklib_wifi_connect);
+    SET_TABLE_FUNCTION("wifi_disconnect", networklib_wifi_disconnect);
+    SET_TABLE_FUNCTION("wifi_scan"      , networklib_wifi_scan);
+    SET_TABLE_FUNCTION("myip"           , networklib_myip);
+    lua_setglobal(L, "net");
 }

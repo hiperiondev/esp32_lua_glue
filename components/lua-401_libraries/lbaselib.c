@@ -221,7 +221,14 @@ static int luaB_next(lua_State *L) {
 
 #ifdef INTERPRETER
 static int passresults(lua_State *L, int status, int oldtop) {
-    static const char *const errornames[] = { "ok", "run-time error", "file error", "syntax error", "memory error", "error in error handling" };
+    static const char *const errornames[] = {
+            "ok",
+            "run-time error",
+            "file error",
+            "syntax error",
+            "memory error",
+            "error in error handling"
+    };
     if (status == 0) {
         int nresults = lua_gettop(L) - oldtop;
         if (nresults > 0)
@@ -526,8 +533,12 @@ static int luaB_sort(lua_State *L) {
 
 #define num_deprecated    4
 
-static const struct luaL_reg deprecated_names[num_deprecated] = { { "foreachvar", luaB_foreach }, { "nextvar", luaB_next }, { "rawgetglobal", luaB_rawget }, {
-        "rawsetglobal", luaB_rawset } };
+static const struct luaL_reg deprecated_names[num_deprecated] = {
+        { "foreachvar"  , luaB_foreach },
+        { "nextvar"     , luaB_next    },
+        { "rawgetglobal", luaB_rawget  },
+        { "rawsetglobal", luaB_rawset  }
+};
 
 #ifdef LUA_DEPRECATEDFUNCS
 

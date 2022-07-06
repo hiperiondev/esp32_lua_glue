@@ -98,6 +98,7 @@ void lua_task(void *pvParameter) {
                 .stop_bits = UART_STOP_BITS_1,
                 .flow_ctrl = UART_HW_FLOWCTRL_DISABLE
         };
+
     ESP_ERROR_CHECK(uart_param_config(EX_UART_NUM, &uart_config));
     ESP_ERROR_CHECK(uart_set_pin(EX_UART_NUM, -1, -1, -1, -1));
     ESP_ERROR_CHECK(uart_driver_install(EX_UART_NUM, 256, 0, 0, NULL, 0));
@@ -124,7 +125,7 @@ void app_main(void) {
     xTaskCreatePinnedToCore(
             lua_task,
             "LUA Task",
-            20000,
+            25000,
             NULL,
             10,
             NULL,

@@ -44,4 +44,8 @@
 #define PRINTF(...) printf(__VA_ARGS__)
 #define EXIT(EN)    printf("exit not allowed: %d\n", EN)
 
+#define SET_TABLE_FUNCTION(name, fun)   lua_pushstring(L, name); \
+                                        lua_pushcfunction(L, fun); \
+                                        lua_settable(L, -3);
+
 #endif /* LUA_401_PORT_H_ */

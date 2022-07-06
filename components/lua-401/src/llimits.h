@@ -82,15 +82,15 @@ typedef unsigned long Instruction;
  ** For an instruction with 2 bytes, size is 16, and size_b can be 5
  ** (accordingly, size_u will be 10, and size_a will be 5)
  */
-#define SIZE_INSTRUCTION        32
-#define SIZE_B          9
+#define SIZE_INSTRUCTION  32
+#define SIZE_B            9
 
-#define SIZE_OP         6
-#define SIZE_U          (SIZE_INSTRUCTION-SIZE_OP)
-#define POS_U           SIZE_OP
-#define POS_B           SIZE_OP
-#define SIZE_A          (SIZE_INSTRUCTION-(SIZE_OP+SIZE_B))
-#define POS_A           (SIZE_OP+SIZE_B)
+#define SIZE_OP           6
+#define SIZE_U            (SIZE_INSTRUCTION-SIZE_OP)
+#define POS_U             SIZE_OP
+#define POS_B             SIZE_OP
+#define SIZE_A            (SIZE_INSTRUCTION-(SIZE_OP+SIZE_B))
+#define POS_A             (SIZE_OP+SIZE_B)
 
 /*
  ** limits for opcode arguments.

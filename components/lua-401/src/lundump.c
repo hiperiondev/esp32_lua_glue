@@ -164,7 +164,7 @@ static void TestSize(lua_State *L, int s, const char *what, ZIO *Z) {
 }
 
 #define TESTSIZE(s)    TestSize(L,s,#s,Z)
-#define V(v)    v/16,v%16
+#define V(v)           v/16,v%16
 
 static int LoadHeader(lua_State *L, ZIO *Z) {
     int version, swap;

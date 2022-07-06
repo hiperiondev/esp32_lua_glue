@@ -85,6 +85,60 @@ static int datalib_var_get(lua_State *L) {
         goto end;
     }
 
+    if (!strcmp(i, "is_anynum")) {
+        if (ANY_NUM(data->type))
+            lua_pushnumber(L, 1);
+        else
+            lua_pushnil(L);
+        goto end;
+    }
+
+    if (!strcmp(i, "is_anydate")) {
+        if (ANY_DATE(data->type))
+            lua_pushnumber(L, 1);
+        else
+            lua_pushnil(L);
+    }
+
+    if (!strcmp(i, "is_anybit")) {
+        if (ANY_BIT(data->type))
+            lua_pushnumber(L, 1);
+        else
+            lua_pushnil(L);
+        goto end;
+    }
+    if (!strcmp(i, "is_anyreal")) {
+        if (ANY_REAL(data->type))
+            lua_pushnumber(L, 1);
+        else
+            lua_pushnil(L);
+        goto end;
+    }
+
+    if (!strcmp(i, "is_anyint")) {
+        if (ANY_INT(data->type))
+            lua_pushnumber(L, 1);
+        else
+            lua_pushnil(L);
+        goto end;
+    }
+
+    if (!strcmp(i, "is_anystring")) {
+        if (ANY_STRING(data->type))
+            lua_pushnumber(L, 1);
+        else
+            lua_pushnil(L);
+        goto end;
+    }
+
+    if (!strcmp(i, "is_anymagnitude")) {
+        if (ANY_MAGNITUDE(data->type))
+            lua_pushnumber(L, 1);
+        else
+            lua_pushnil(L);
+        goto end;
+    }
+
     if (!strcmp(i, "val")) {
         switch (data->type) {
             case DATA_TYPE_NULL:
@@ -357,134 +411,6 @@ static int datalib_var_new(lua_State *L) {
     return 1;
 }
 
-static int datalib_is_anynum(lua_State *L) {
-    if (!lua_isuserdata(L, 1)) {
-        lua_pop(L, 1);
-        lua_pushnil(L);
-        return 1;
-    }
-    data_t *data = (data_t*) lua_touserdata(L, 1);
-
-    if (ANY_NUM(data->type))
-        lua_pushnumber(L, 1);
-    else
-        lua_pushnil(L);
-
-    return 1;
-}
-
-static int datalib_is_anydate(lua_State *L) {
-    if (!lua_isuserdata(L, 1)) {
-        lua_pop(L, 1);
-        lua_pushnil(L);
-        return 1;
-    }
-    data_t *data = (data_t*) lua_touserdata(L, 1);
-
-    if (ANY_DATE(data->type))
-        lua_pushnumber(L, 1);
-    else
-        lua_pushnil(L);
-
-    return 1;
-}
-
-static int datalib_is_anybit(lua_State *L) {
-    if (!lua_isuserdata(L, 1)) {
-        lua_pop(L, 1);
-        lua_pushnil(L);
-        return 1;
-    }
-    data_t *data = (data_t*) lua_touserdata(L, 1);
-
-    if (ANY_BIT(data->type))
-        lua_pushnumber(L, 1);
-    else
-        lua_pushnil(L);
-
-    return 1;
-}
-
-static int datalib_is_anyreal(lua_State *L) {
-    if (!lua_isuserdata(L, 1)) {
-        lua_pop(L, 1);
-        lua_pushnil(L);
-        return 1;
-    }
-    data_t *data = (data_t*) lua_touserdata(L, 1);
-
-    if (ANY_REAL(data->type))
-        lua_pushnumber(L, 1);
-    else
-        lua_pushnil(L);
-
-    return 1;
-}
-
-static int datalib_is_anyint(lua_State *L) {
-    if (!lua_isuserdata(L, 1)) {
-        lua_pop(L, 1);
-        lua_pushnil(L);
-        return 1;
-    }
-    data_t *data = (data_t*) lua_touserdata(L, 1);
-
-    if (ANY_INT(data->type))
-        lua_pushnumber(L, 1);
-    else
-        lua_pushnil(L);
-
-    return 1;
-}
-
-static int datalib_is_anystring(lua_State *L) {
-    if (!lua_isuserdata(L, 1)) {
-        lua_pop(L, 1);
-        lua_pushnil(L);
-        return 1;
-    }
-    data_t *data = (data_t*) lua_touserdata(L, 1);
-
-    if (ANY_STRING(data->type))
-        lua_pushnumber(L, 1);
-    else
-        lua_pushnil(L);
-
-    return 1;
-}
-
-static int datalib_is_anyelementary(lua_State *L) {
-    if (!lua_isuserdata(L, 1)) {
-        lua_pop(L, 1);
-        lua_pushnil(L);
-        return 1;
-    }
-    data_t *data = (data_t*) lua_touserdata(L, 1);
-
-    if (ANY_ELEMENTARY(data->type))
-        lua_pushnumber(L, 1);
-    else
-        lua_pushnil(L);
-
-    return 1;
-}
-
-static int datalib_is_anymagnitude(lua_State *L) {
-    if (!lua_isuserdata(L, 1)) {
-        lua_pop(L, 1);
-        lua_pushnil(L);
-        return 1;
-    }
-    data_t *data = (data_t*) lua_touserdata(L, 1);
-
-    if (ANY_MAGNITUDE(data->type))
-        lua_pushnumber(L, 1);
-    else
-        lua_pushnil(L);
-
-    return 1;
-}
-
 static int datalib_getbit(lua_State *L) {
     if (!lua_isuserdata(L, 1)) {
         lua_pop(L, 1);
@@ -533,15 +459,7 @@ static int datalib_clearbit(lua_State *L) {
 }
 
 static const struct luaL_reg datalib_core[] = {
-        { "var"             , datalib_var_new          },
-        { "is_anynum"       , datalib_is_anynum        },
-        { "is_anydate"      , datalib_is_anydate       },
-        { "is_anybit"       , datalib_is_anybit        },
-        { "is_anyreal"      , datalib_is_anyreal       },
-        { "is_anyint"       , datalib_is_anyint        },
-        { "is_anystring"    , datalib_is_anystring     },
-        { "is_anyelementary", datalib_is_anyelementary },
-        { "is_anymagnitude" , datalib_is_anymagnitude  },
+        { "new"             , datalib_var_new          },
         { "getbit"          , datalib_getbit           },
         { "setbit"          , datalib_setbit           },
         { "clearbit"        , datalib_clearbit         },

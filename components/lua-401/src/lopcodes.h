@@ -18,7 +18,7 @@
  type 1: 1 unsigned argument in the higher bits (called `U')
  type 2: 1 signed argument in the higher bits          (`S')
  type 3: 1st unsigned argument in the higher bits      (`A')
- 2nd unsigned argument in the middle bits      (`B')
+         2nd unsigned argument in the middle bits      (`B')
 
  A signed argument is represented in excess K; that is, the number
  value is the unsigned value minus K. K is exactly the maximum value
@@ -74,40 +74,40 @@
 
 typedef enum {
     /*----------------------------------------------------------------------
-    name        args    stack before    stack after side effects
+    name             args    stack before     stack after side effects
     ------------------------------------------------------------------------*/
-    OP_END,/*   -   -       (return)    no results  */
-    OP_RETURN,/*    U   v_n-v_x(at u)   (return)    returns v_x-v_n */
+    OP_END, /*        -           -           (return)     no results  */
+    OP_RETURN,/*      U       v_n-v_x(at u)   (return)     returns v_x-v_n */
 
-    OP_CALL,/*  A B v_n-v_1 f(at a) r_b-r_1     f(v1,...,v_n)   */
-    OP_TAILCALL,/*  A B v_n-v_1 f(at a) (return)    f(v1,...,v_n)   */
+    OP_CALL,/*        A B     v_n-v_1 f(at a) r_b-r_1      f(v1,...,v_n)   */
+    OP_TAILCALL,/*    A B     v_n-v_1 f(at a) (return)     f(v1,...,v_n)   */
 
-    OP_PUSHNIL,/*   U   -       nil_1-nil_u         */
-    OP_POP,/*   U   a_u-a_1     -               */
+    OP_PUSHNIL,/*     U               -       nil_1-nil_u         */
+    OP_POP,/*         U   a_u-a_1     -               */
 
-    OP_PUSHINT,/*   S   -       (Number)s           */
-    OP_PUSHSTRING,/* K  -       KSTR[k]             */
-    OP_PUSHNUM,/*   N   -       KNUM[n]             */
-    OP_PUSHNEGNUM,/* N  -       -KNUM[n]            */
+    OP_PUSHINT,/*     S   -       (Number)s           */
+    OP_PUSHSTRING,/*  K   -       KSTR[k]             */
+    OP_PUSHNUM,/*     N   -       KNUM[n]             */
+    OP_PUSHNEGNUM,/*  N   -       -KNUM[n]            */
 
-    OP_PUSHUPVALUE,/* U -       Closure[u]          */
+    OP_PUSHUPVALUE,/* U -         Closure[u]          */
 
-    OP_GETLOCAL,/*  L   -       LOC[l]              */
-    OP_GETGLOBAL,/* K   -       VAR[KSTR[k]]            */
+    OP_GETLOCAL,/*    L   -       LOC[l]              */
+    OP_GETGLOBAL,/*   K   -       VAR[KSTR[k]]            */
 
-    OP_GETTABLE,/*  -   i t     t[i]                */
-    OP_GETDOTTED,/* K   t       t[KSTR[k]]          */
-    OP_GETINDEXED,/* L  t       t[LOC[l]]           */
-    OP_PUSHSELF,/*  K   t       t t[KSTR[k]]            */
+    OP_GETTABLE,/*    -   i t     t[i]                */
+    OP_GETDOTTED,/*   K   t       t[KSTR[k]]          */
+    OP_GETINDEXED,/*  L   t       t[LOC[l]]           */
+    OP_PUSHSELF,/*    K   t       t t[KSTR[k]]            */
 
     OP_CREATETABLE,/* U -       newarray(size = u)      */
 
-    OP_SETLOCAL,/*  L   x       -       LOC[l]=x    */
-    OP_SETGLOBAL,/* K   x       -       VAR[KSTR[k]]=x  */
-    OP_SETTABLE,/*  A B v a_a-a_1 i t   (pops b values) t[i]=v      */
+    OP_SETLOCAL,/*    L   x       -       LOC[l]=x    */
+    OP_SETGLOBAL,/*   K   x       -       VAR[KSTR[k]]=x  */
+    OP_SETTABLE,/*    A B v a_a-a_1 i t   (pops b values) t[i]=v      */
 
-    OP_SETLIST,/*   A B v_b-v_1 t   t       t[i+a*FPF]=v_i  */
-    OP_SETMAP,/*    U   v_u k_u - v_1 k_1 t t   t[k_i]=v_i  */
+    OP_SETLIST,/*     A B v_b-v_1 t   t       t[i+a*FPF]=v_i  */
+    OP_SETMAP,/*      U   v_u k_u - v_1 k_1 t t   t[k_i]=v_i  */
 
     OP_ADD,/*   -   y x     x+y             */
     OP_ADDI,/*  S   x       x+s             */

@@ -81,10 +81,19 @@ static int memorylib_reset_reason(lua_State *L) {
 }
 
 static int memorylib_tasks_info(lua_State *L) {
-    TaskStatus_t *pxTaskStatusArray;
-    volatile UBaseType_t uxArraySize, x;
-    uint32_t ulTotalRunTime;
+    //TaskStatus_t *pxTaskStatusArray;
+    //volatile UBaseType_t uxArraySize, x;
+    //uint32_t ulTotalRunTime;
+    char ptrTaskList[250];
 
+    vTaskList(ptrTaskList);
+    printf("----------------------------------------------------\n");
+    printf("Task            State   Prio    Stack   Num     Core\n");
+    printf("----------------------------------------------------\n");
+    printf(ptrTaskList);
+    printf("----------------------------------------------------\n");
+
+    /*
     uxArraySize = uxTaskGetNumberOfTasks();
     pxTaskStatusArray = pvPortMalloc(uxArraySize * sizeof(TaskStatus_t));
 
@@ -95,16 +104,17 @@ static int memorylib_tasks_info(lua_State *L) {
         }
         vPortFree(pxTaskStatusArray);
     }
+    */
     return 0;
 }
 
-static const struct luaL_reg memorylib[] = {
-        { "mem_minimum_free_heap_size", memorylib_minimum_free_heap_size },
-        { "mem_free_heap_size"        , memorylib_free_heap_size         },
-        { "mem_reset_reason"          , memorylib_reset_reason           },
-        { "mem_tasks_info"            , memorylib_tasks_info             },
-};
-
 LUALIB_API void lua_memorylibopen(lua_State *L) {
-    luaL_openl(L, memorylib);
+    lua_newtable(L);
+
+    SET_TABLE_FUNCTION("minimum_free_heap_size", memorylib_minimum_free_heap_size);
+    SET_TABLE_FUNCTION("free_heap_size"        , memorylib_free_heap_size);
+    SET_TABLE_FUNCTION("reset_reason"          , memorylib_reset_reason);
+    SET_TABLE_FUNCTION("tasks_info"            , memorylib_tasks_info);
+
+    lua_setglobal(L, "mem");
 }
