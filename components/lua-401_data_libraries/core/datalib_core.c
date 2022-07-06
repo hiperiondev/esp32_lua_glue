@@ -271,7 +271,7 @@ static int datalib_var_set(lua_State *L) {
         goto end;
     }
 
-    if (!strcmp(i, "val")) {
+    if (!strcmp(i, "v")) {
         switch (data->type) {
             case DATA_TYPE_NULL:
             case DATA_TYPE_NIL:

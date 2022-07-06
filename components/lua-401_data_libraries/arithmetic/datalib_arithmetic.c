@@ -172,15 +172,13 @@ static int datalib_expt(lua_State *L) {
     return 1;
 }
 
-static const struct luaL_reg datalib_arithmetic[] = {
-        { "_add"  , datalib_add  },
-        { "_mul"  , datalib_mul  },
-        { "_sub"  , datalib_sub  },
-        { "_div"  , datalib_div  },
-        { "_mod"  , datalib_mod  },
-        { "_expt" , datalib_expt },
-};
-
 LUALIB_API void lua_datalib_arithmeticopen(lua_State *L) {
-    luaL_openl(L, datalib_arithmetic);
+    lua_getglobal(L, "var");
+    SET_TABLE_FUNCTION("add"  , datalib_add);
+    SET_TABLE_FUNCTION("mul"  , datalib_mul);
+    SET_TABLE_FUNCTION("sub"  , datalib_sub);
+    SET_TABLE_FUNCTION("div"  , datalib_div);
+    SET_TABLE_FUNCTION("mod"  , datalib_mod);
+    SET_TABLE_FUNCTION("expt" , datalib_expt);
+    lua_setglobal(L, "var");
 }
