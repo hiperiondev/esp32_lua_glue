@@ -28,6 +28,5 @@ Please read the [Wiki](https://github.com/hiperiondev/esp32_lua_glue/wiki).
 #
 ### TODO
 - Complete minimal libraries
-- Add ssh console
 - Create documentation
 - Add persistence/serialization 
